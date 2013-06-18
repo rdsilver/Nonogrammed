@@ -1,0 +1,19 @@
+%h1 Listing grids
+%table
+  %tr
+    %th Height
+    %th Width
+    %th Solution
+    %th
+    %th
+    %th
+  - @grids.each do |grid|
+    %tr
+      %td= grid.height
+      %td= grid.width
+      %td= grid.solution
+      %td= link_to 'Show', grid
+      %td= link_to 'Edit', edit_grid_path(grid)
+      %td= link_to 'Destroy', grid, method: :delete, data: { confirm: 'Are you sure?' }
+%br
+= link_to 'New Grid', new_grid_path

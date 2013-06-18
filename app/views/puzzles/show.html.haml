@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %b Difficulty:
+  = @puzzle.difficulty
+%p
+  %b Grid:
+  = @puzzle.grid_id
+%p
+  %b Points:
+  = @puzzle.points
+= link_to 'Edit', edit_puzzle_path(@puzzle)
+|
+\#{link_to 'Back', puzzles_path}

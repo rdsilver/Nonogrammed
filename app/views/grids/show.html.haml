@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %b Height:
+  = @grid.height
+%p
+  %b Width:
+  = @grid.width
+%p
+  %b Solution:
+  = @grid.solution
+= link_to 'Edit', edit_grid_path(@grid)
+|
+\#{link_to 'Back', grids_path}

@@ -1,0 +1,23 @@
+= form_for(@grid) do |f|
+  - if @grid.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@grid.errors.count, "error")
+        prohibited this grid from being saved:
+      %ul
+        - @grid.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :height
+    %br
+    = f.number_field :height
+  .field
+    = f.label :width
+    %br
+    = f.number_field :width
+  .field
+    = f.label :solution
+    %br
+    = f.text_field :solution
+  .actions
+    = f.submit
