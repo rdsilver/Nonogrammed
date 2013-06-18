@@ -1,0 +1,27 @@
+<h1>Listing puzzles</h1>
+
+<table>
+  <tr>
+    <th>Difficulty</th>
+    <th>Grid</th>
+    <th>Points</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @puzzles.each do |puzzle| %>
+  <tr>
+    <td><%= puzzle.difficulty %></td>
+    <td><%= puzzle.grid_id %></td>
+    <td><%= puzzle.points %></td>
+    <td><%= link_to 'Show', puzzle %></td>
+    <td><%= link_to 'Edit', edit_puzzle_path(puzzle) %></td>
+    <td><%= link_to 'Destroy', puzzle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Puzzle', new_puzzle_path %>

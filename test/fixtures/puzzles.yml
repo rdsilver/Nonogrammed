@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  difficulty: 1
+  grid_id: 1
+  points: 1
+
+two:
+  difficulty: 1
+  grid_id: 1
+  points: 1
