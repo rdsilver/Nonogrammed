@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 
-
 group :development do 
   gem 'sqlite3'
 end
@@ -16,7 +15,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "haml-rails"
 gem 'jquery-rails'
+gem "therubyracer"
+gem "less-rails"
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass', '~> 2.3.1.0'
+
 
 group :production do
   gem 'pg', '0.12.2'
