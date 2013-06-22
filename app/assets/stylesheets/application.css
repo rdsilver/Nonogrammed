@@ -14,7 +14,6 @@
 
  .content {
   background-color: #eee;
-  padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
@@ -25,19 +24,25 @@
 }
 
 #users {
-	background:rgb(100,200,255);
+	font-size: 18px;
+	text-align: center;
+	background:rgb(129,227,68);
 	display:inline-table;
 	width:300px;
 }
 
 #puzzles{
-	background:rgb(200,100,255);
+	font-size: 18px;
+	text-align: center;
+	background:rgb(211,227,68);
 	display:inline-table;
 	width:300px;
 }
 
 #grids{
-	background:rgb(255,100,200);
+	font-size: 18px;
+	text-align: center;
+	background:rgb(227,187,68);
 	display:inline-table;
 	width:300px;
 }
