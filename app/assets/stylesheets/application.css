@@ -24,20 +24,23 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
-#users {
-	background:rgb(100,200,255);
+.navbarHeader
+{
 	display:inline-table;
 	width:300px;
+	text-align:center;
+	color:rgb(0,0,0);
+	font-size:23px;
+}
+
+#users {
+	background:rgb(100,200,255);
 }
 
 #puzzles{
 	background:rgb(200,100,255);
-	display:inline-table;
-	width:300px;
 }
 
 #grids{
 	background:rgb(255,100,200);
-	display:inline-table;
-	width:300px;
 }
