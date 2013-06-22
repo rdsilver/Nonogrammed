@@ -24,16 +24,17 @@
 }
 
 .navbar{
-	min-width:900px;
+	margin-left: 14%;
+	width: 84%;
 }
 
 .navbarHeader
 {
+	border: 2px solid rgb(0,0,0);
 	display:inline-table;
-	margin-left: 25px;
 	padding-top: 8px;
 	font-style: oblique;
-	width:300px;
+	width: 28%;
 	height: 30px;
 	text-align:center;
 	font-size:23px;
