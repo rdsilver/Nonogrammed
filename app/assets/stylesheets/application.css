@@ -14,7 +14,6 @@
 
  .content {
   background-color: #eee;
-  padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
@@ -31,20 +30,23 @@
 .navbarHeader
 {
 	display:inline-table;
+	margin-left: 25px;
+	padding-top: 8px;
+	font-style: oblique;
 	width:300px;
+	height: 30px;
 	text-align:center;
-	color:rgb(0,0,0);
 	font-size:23px;
 }
 
 #users {
-	background:rgb(100,200,255);
+	background:rgb(113,227,91);
 }
 
 #puzzles{
-	background:rgb(200,100,255);
+	background:rgb(169,227,68);
 }
 
 #grids{
-	background:rgb(255,100,200);
+	background:rgb(227,185,68);
 }
