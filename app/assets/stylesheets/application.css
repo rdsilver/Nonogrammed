@@ -23,26 +23,22 @@
   box-shadow: 0 1px 2px rgba(0,0,0,.15);
 }
 
-#users {
-	font-size: 18px;
-	text-align: center;
-	background:rgb(129,227,68);
-	display:inline-table;
+.navbarHeader{
+display:inline-table;
 	width:300px;
+	text-align:center;
+	color:rgb(0,0,0);
+	font-size:23px;
+}
+
+#users {
+	background:rgb(113,227,91);
 }
 
 #puzzles{
-	font-size: 18px;
-	text-align: center;
-	background:rgb(211,227,68);
-	display:inline-table;
-	width:300px;
+	background:rgb(169,227,68);
 }
 
 #grids{
-	font-size: 18px;
-	text-align: center;
-	background:rgb(227,187,68);
-	display:inline-table;
-	width:300px;
+	background:rgb(227,185,68);
 }
