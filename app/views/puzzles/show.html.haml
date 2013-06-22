@@ -1,7 +1,25 @@
 %div.puzzle_description
   %table.puzzle_description_table
-    %td= "Puzzle Number: " + @puzzle_name
-    %td= "Puzzle Difficulty: " + @puzzle_difficulty
-    %td= "Puzzle Points: " + @puzzle_points
+    %tr
+      %td.left_puzzle_description_column
+        Puzzle Number
+      %td.placeholder_column
+        = "--->"
+      %td.right_puzzle_description_column
+        = @puzzle_name
+    %tr
+      %td.left_puzzle_description_column
+        Puzzle Difficulty
+      %td.placeholder_column
+        = "--->" 
+      %td.right_puzzle_description_column
+        = @puzzle_difficulty
+    %tr
+      %td.left_puzzle_description_column
+        Puzzle Points
+      %td.placeholder_column
+        = "--->"
+      %td.right_puzzle_description_column
+        = @puzzle_points
 
 %table
