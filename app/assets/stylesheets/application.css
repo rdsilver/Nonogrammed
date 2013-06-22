@@ -40,15 +40,15 @@
 
 
 .navbar{
-	padding-left: 7.5%;
-	width: 100%;
-	background:rgb(160,200,245);
+	padding-left: 14%;
+	background:#D1C0AF;
 }
 
 .navbarHeader
 {
 	border-left: 1px solid rgb(0,0,0);
 	border-right: 1px solid rgb(0,0,0);
+	border-bottom: 1px solid rgb(0,0,0);
 	display:inline-table;
 	padding-top: 8px;
 	font-style: oblique;

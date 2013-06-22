@@ -13,7 +13,10 @@ class PuzzlesController < ApplicationController
   # GET /puzzles/1
   # GET /puzzles/1.json
   def show
-    @puzzle = Puzzle.find(params[:id])
+    puzzle = Puzzle.find(params[:id])
+    @puzzle_name = puzzle.id.to_s
+    @puzzle_difficulty = puzzle.difficulty.to_s
+    @puzzle_points = puzzle.points.to_s
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,3 +1,13 @@
 // Place all the styles related to the Puzzles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.puzzle_description
+{
+	text-align:center;
+	font-size:25px;
+	width:400px;
+	margin-left:auto;
+	margin-right:auto;
+	line-height:27px;
+}
