@@ -1,2 +1,19 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
+
+ul, ol {
+padding: 0;
+margin: 0 0 10px 0px;
+}
+
+.container-fluid {
+padding-right: 0;
+padding-left: 0;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-left: 0px;
+    padding-right: 5px;
+  }
+}
