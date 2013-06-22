@@ -1,4 +1,6 @@
 Nonogrammed::Application.routes.draw do
+  get "dashboard/show"
+
   resources :grids
 
 
@@ -7,5 +9,5 @@ Nonogrammed::Application.routes.draw do
 
   resources :users
 
-  root :to => 'welcome#index'  
+  root :to => 'dashboard#show'  
 end
