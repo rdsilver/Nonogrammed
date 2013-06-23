@@ -29,12 +29,12 @@
         %td
           - unless n == 0
             = "#"
-    - @puzzle_height.times do
+    - (0..@puzzle_height).each do |h|
       %tr
         %td.puzzle_numbers_column
           = "#"
-        - @puzzle_width.times do
-          %td.puzzle_cell
+        - (0..@puzzle_width).each do |w|
+          %td.puzzle_cell{id: "puzzle-cell-#{h}-#{w}"}
   =submit_tag "Reset Puzzle" , id: "reset_puzzle"
   =submit_tag "Give me a hint!" , id: "hint_puzzle"
 
