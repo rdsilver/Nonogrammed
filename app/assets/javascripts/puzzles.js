@@ -23,7 +23,7 @@ $(document).ready(function() {
   });
 
 
-  $('#puzzle_table').on('mousedown',function(e){ /*Fixes unwanted highlighting*/
+  $('#puzzle_and_buttons_div').on('mousedown',function(e){ /*Fixes unwanted highlighting*/
     e.preventDefault(); 
   });
 
