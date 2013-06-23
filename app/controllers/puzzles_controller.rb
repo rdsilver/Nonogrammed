@@ -17,6 +17,8 @@ class PuzzlesController < ApplicationController
     @puzzle_name = puzzle.id.to_s
     @puzzle_difficulty = puzzle.difficulty.to_s
     @puzzle_points = puzzle.points.to_s
+    @puzzle_height = puzzle.grid.height
+    @puzzle_width = puzzle.grid.width
 
     respond_to do |format|
       format.html # show.html.erb

@@ -35,3 +35,35 @@
 .placeholder_column{
   width: 50px;
 }
+
+.puzzle_table{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 200 px;
+  margin-left: auto;
+  margin-right: auto;
+  table, tr, td{
+    border: 1px solid black;
+  }
+  td{
+    width: 28px;
+    height: 28px;
+    text-align: center;
+  }
+  .puzzle_numbers_row{
+    height: 50px;
+  }
+  .puzzle_numbers_column{
+    width: 50px;
+  }
+  .puzzle_cell.black{
+    background-image:url("/assets/black_cell.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .puzzle_cell.x{
+    background-image:url("/assets/x_cell.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}

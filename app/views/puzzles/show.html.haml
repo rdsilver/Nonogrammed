@@ -22,4 +22,15 @@
       %td.right_puzzle_description_column
         = @puzzle_points
 
-%table
+%table.puzzle_table
+  %tr.puzzle_numbers_row
+    - (0..@puzzle_width).each do |n|
+      %td
+        - unless n == 0
+          = "#"
+  - @puzzle_height.times do
+    %tr
+      %td.puzzle_numbers_column
+        = "#"
+      - @puzzle_width.times do
+        %td.puzzle_cell
