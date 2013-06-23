@@ -16,8 +16,6 @@
   width: 400 px;
   margin-left: auto;
   margin-right: auto;
-  
-
 }
 
 .left_puzzle_description_column{
@@ -36,8 +34,8 @@
   width: 50px;
 }
 
-.puzzle_table{
-  margin-top: 50px;
+#puzzle_table{
+  margin-top: 10px;
   margin-bottom: 50px;
   width: 200 px;
   margin-left: auto;
@@ -66,4 +64,18 @@
     background-repeat: no-repeat;
     background-position: center center;
   }
+}
+
+#puzzle_and_buttons_div {
+  max-width:500px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#hint_puzzle{
+  margin-left:10px;
+}
+
+#reset_puzzle{
+  margin-left:10px;
 }

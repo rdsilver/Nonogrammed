@@ -22,12 +22,21 @@ $(document).ready(function() {
     }
   });
 
+
+  $('#puzzle_table').on('mousedown',function(e){ /*Fixes unwanted highlighting*/
+    e.preventDefault(); 
+  });
+
   $('body').on('mouseup', function(e){
     e.preventDefault();
     mouse_down = false;
   });
 
-
-
+  $('#reset_puzzle').on('click',function(){  /*Resets all the cells to have neither the X or the Black Css Class*/
+    $('.puzzle_cell').each(function (){
+      $(this).removeClass('black');
+      $(this).removeClass("x");
+    });
+  });  
 
 });

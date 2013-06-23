@@ -21,16 +21,21 @@
         = "--->"
       %td.right_puzzle_description_column
         = @puzzle_points
-
-%table.puzzle_table
-  %tr.puzzle_numbers_row
-    - (0..@puzzle_width).each do |n|
-      %td
-        - unless n == 0
+%p.center_text.bold_text.small_margin_top "Completion checks are done automatically!"        
+%div#puzzle_and_buttons_div        
+  %table#puzzle_table
+    %tr.puzzle_numbers_row
+      - (0..@puzzle_width).each do |n|
+        %td
+          - unless n == 0
+            = "#"
+    - @puzzle_height.times do
+      %tr
+        %td.puzzle_numbers_column
           = "#"
-  - @puzzle_height.times do
-    %tr
-      %td.puzzle_numbers_column
-        = "#"
-      - @puzzle_width.times do
-        %td.puzzle_cell
+        - @puzzle_width.times do
+          %td.puzzle_cell
+  =submit_tag "Reset Puzzle" , id: "reset_puzzle"
+  =submit_tag "Give me a hint!" , id: "hint_puzzle"
+
+

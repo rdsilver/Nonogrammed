@@ -69,3 +69,15 @@
 #grids{
 	background:rgb(227,185,68);
 }
+
+.center_text{
+  text-align:center;
+}
+
+.bold_text{
+  font-weight:bold;
+}
+
+.small_margin_top{
+  margin-top:10px;
+}
