@@ -26,8 +26,10 @@
   %table#puzzle_table
     %tr.puzzle_numbers_row
       - (0..@puzzle_width + 1).each do |n|
-        %td
-          - unless n == 0
+        - if n == 0
+          %td.puzzle_cell.corner
+        - else
+          %td
             = "#"
     - (0..@puzzle_height).each do |h|
       %tr
