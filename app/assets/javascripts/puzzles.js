@@ -1,3 +1,50 @@
+function moveSelectedDown(){
+  var puzzleHeight = parseInt($('#puzzle_height').attr('value'));
+  var puzzleWidth = parseInt($('#puzzle_width').attr('value'));
+  var currentCell = $('.puzzle_cell.selected')
+  var cellRow = parseInt(currentCell.attr("id")[12]);
+  if (!isNaN(parseInt(currentCell.attr("id")[13]))){
+    cellRow = 10 * parseInt(currentCell.attr("id")[12]);
+    cellRow += parseInt(currentCell.attr("id")[13]);
+  }
+  var cellColumn = parseInt(currentCell.attr("id")[14]);
+  if(cellRow == puzzleHeight){
+    return;
+  }
+  var targetString = '#puzzle-cell-'
+  targetString += cellRow + 1;
+  targetString += '-';
+  targetString += cellColumn;
+  var targetCell = $(targetString)
+  currentCell.removeClass('selected');
+  targetCell.addClass('selected');
+};
+
+function moveSelectedUp(){
+  var puzzleHeight = parseInt($('#puzzle_height').attr('value'));
+  var puzzleWidth = parseInt($('#puzzle_width').attr('value'));
+  var currentCell = $('.puzzle_cell.selected')
+  var cellRow = parseInt(currentCell.attr("id")[12]);
+  if (!isNaN(parseInt(currentCell.attr("id")[13]))){
+    cellRow = 10 * parseInt(currentCell.attr("id")[12]);
+    cellRow += parseInt(currentCell.attr("id")[13]);
+  }
+  var cellColumn = parseInt(currentCell.attr("id")[14]);
+  if(cellRow >= 10){
+    cellColumn = parseInt(currentCell.attr("id")[15]);
+  }
+  if(cellRow == 1){
+    return;
+  }
+  var targetString = '#puzzle-cell-'
+  targetString += cellRow - 1;
+  targetString += '-';
+  targetString += cellColumn;
+  var targetCell = $(targetString)
+  currentCell.removeClass('selected');
+  targetCell.addClass('selected');
+};
+
 $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
@@ -64,11 +111,15 @@ $(document).ready(function() {
   });  
 
   $(document).keypress(function(event) {
-    console.log(event.which);
-    if(event.which == 13){
+    if(event.which == 13){//Enter
       $("#puzzle-cell-1-1").addClass('selected');
     }
-    
+    if(event.which == 115){//S
+      moveSelectedDown();
+    }
+    else if(event.which == 119){//W
+      moveSelectedUp();
+    }
   });
 
 });
