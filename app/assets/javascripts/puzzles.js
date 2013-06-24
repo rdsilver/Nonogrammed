@@ -1,3 +1,85 @@
+function puzzleHeight(){
+  return parseInt($('#puzzle_height').attr('value'));
+}
+
+function puzzleWidth(){
+  return parseInt($('#puzzle_width').attr('value'));
+}
+
+function currentSelectedCell(){
+  return $('.puzzle_cell.selected')
+}
+
+function row(cell){//only call this on puzzle grid cells, plz and thx
+  var value = parseInt(cell.attr("id")[12]);//this just happens to be where in the id the value is, trust me
+  if (!isNaN(parseInt(cell.attr("id")[13]))){//if the prospective next digit is a number
+    value = 10 * value;//turn the current 1s digit into a 10s digit
+    value += parseInt(cell.attr('id')[13]);//and then add the actual 1s digit
+  }
+  return value;
+}
+
+function column(cell){//only call this on puzzle grid cells plz and thx
+  var value = parseInt(cell.attr("id")[14]);
+  if (!isNaN(parseInt(cell.attr('id')[15]))){//if the prospective next digit is a number
+    value = 10 * value;//turn the current 1s digit into a 10s digit
+    value += parseInt(cell.attr('id')[15]);//and then add the actual 1s digit
+  }
+  if (row(cell) > 9){//then we need to shift everything over a character because the row has a 10s digit
+    value = parseInt(cell.attr("id")[15]);
+    if (!isNaN(parseInt(cell.attr('id')[16]))){//if the prospective next digit is a number
+      value = 10 * value;//turn the current 1s digit into a 10s digit
+      value += parseInt(cell.attr('id')[16]);//and then add the actual 1s digit
+    }
+  }
+  return value;
+}
+
+function findCell(row, col){
+  var targetString = '#puzzle-cell-'
+  targetString += row;
+  targetString += '-';
+  targetString += col;
+  return $(targetString)
+}
+
+
+function moveSelectedDown(){
+  if(row(currentSelectedCell()) == puzzleHeight()){
+    return;//if the row of the currently selected cell is equal to the puzzle height, don't do anything at all
+  }
+  var targetCell = findCell(row(currentSelectedCell()) + 1, column(currentSelectedCell()));
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+};
+
+function moveSelectedUp(){
+  if(row(currentSelectedCell()) == 1){
+    return;//if the row of the currently selected cell the top row, don't do anything at all
+  }
+  var targetCell = findCell(row(currentSelectedCell()) - 1, column(currentSelectedCell()));
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+};
+
+function moveSelectedRight(){
+  if(column(currentSelectedCell()) == puzzleWidth()){
+    return;
+  }
+  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) + 1);
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+}
+
+function moveSelectedLeft(){
+  if(column(currentSelectedCell()) == 1){
+    return;
+  }
+  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) - 1);
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+}
+
 $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
@@ -64,11 +146,21 @@ $(document).ready(function() {
   });  
 
   $(document).keypress(function(event) {
-    console.log(event.which);
-    if(event.which == 13){
+    if(event.which == 13){//Enter
       $("#puzzle-cell-1-1").addClass('selected');
     }
-    
+    if(event.which == 115){//S
+      moveSelectedDown();
+    }
+    else if(event.which == 119){//W
+      moveSelectedUp();
+    }
+    else if(event.which == 97){//A
+      moveSelectedLeft();
+    }
+    else if(event.which == 100){//D
+      moveSelectedRight();
+    }
   });
 
 });
