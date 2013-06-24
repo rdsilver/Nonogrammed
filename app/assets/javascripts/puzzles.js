@@ -89,7 +89,7 @@ $(document).ready(function() {
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x'); 
-    if(deletion_mode){
+    if(deletion_mode && e.which==1){
       $(this).removeClass('black');
       $(this).removeClass('x');
     }
