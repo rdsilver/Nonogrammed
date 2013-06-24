@@ -20,13 +20,13 @@ function row(cell){//only call this on puzzle grid cells, plz and thx
 }
 
 function column(cell){//only call this on puzzle grid cells plz and thx
-  var value = cell.attr("id")[14];
+  var value = parseInt(cell.attr("id")[14]);
   if (!isNaN(parseInt(cell.attr('id')[15]))){//if the prospective next digit is a number
     value = 10 * value;//turn the current 1s digit into a 10s digit
     value += parseInt(cell.attr('id')[15]);//and then add the actual 1s digit
   }
   if (row(cell) > 9){//then we need to shift everything over a character because the row has a 10s digit
-    value = cell.attr("id")[15];
+    value = parseInt(cell.attr("id")[15]);
     if (!isNaN(parseInt(cell.attr('id')[16]))){//if the prospective next digit is a number
       value = 10 * value;//turn the current 1s digit into a 10s digit
       value += parseInt(cell.attr('id')[16]);//and then add the actual 1s digit
@@ -35,16 +35,20 @@ function column(cell){//only call this on puzzle grid cells plz and thx
   return value;
 }
 
+function findCell(row, col){
+  var targetString = '#puzzle-cell-'
+  targetString += row;
+  targetString += '-';
+  targetString += col;
+  return $(targetString)
+}
+
 
 function moveSelectedDown(){
   if(row(currentSelectedCell()) == puzzleHeight()){
     return;//if the row of the currently selected cell is equal to the puzzle height, don't do anything at all
   }
-  var targetString = '#puzzle-cell-'
-  targetString += row(currentSelectedCell()) + 1;
-  targetString += '-';
-  targetString += column(currentSelectedCell());
-  var targetCell = $(targetString)
+  var targetCell = findCell(row(currentSelectedCell()) + 1, column(currentSelectedCell()));
   currentSelectedCell().removeClass('selected');
   targetCell.addClass('selected');
 };
@@ -53,14 +57,28 @@ function moveSelectedUp(){
   if(row(currentSelectedCell()) == 1){
     return;//if the row of the currently selected cell the top row, don't do anything at all
   }
-  var targetString = '#puzzle-cell-'
-  targetString += row(currentSelectedCell()) - 1;
-  targetString += '-';
-  targetString += column(currentSelectedCell());
-  var targetCell = $(targetString)
+  var targetCell = findCell(row(currentSelectedCell()) - 1, column(currentSelectedCell()));
   currentSelectedCell().removeClass('selected');
   targetCell.addClass('selected');
 };
+
+function moveSelectedRight(){
+  if(column(currentSelectedCell()) == puzzleWidth()){
+    return;
+  }
+  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) + 1);
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+}
+
+function moveSelectedLeft(){
+  if(column(currentSelectedCell()) == 1){
+    return;
+  }
+  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) - 1);
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+}
 
 $(document).ready(function() {
   var deletion_mode = false;
@@ -136,6 +154,12 @@ $(document).ready(function() {
     }
     else if(event.which == 119){//W
       moveSelectedUp();
+    }
+    else if(event.which == 97){//A
+      moveSelectedLeft();
+    }
+    else if(event.which == 100){//D
+      moveSelectedRight();
     }
   });
 
