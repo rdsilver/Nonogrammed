@@ -1,47 +1,64 @@
-function moveSelectedDown(){
-  var puzzleHeight = parseInt($('#puzzle_height').attr('value'));
-  var puzzleWidth = parseInt($('#puzzle_width').attr('value'));
-  var currentCell = $('.puzzle_cell.selected')
-  var cellRow = parseInt(currentCell.attr("id")[12]);
-  if (!isNaN(parseInt(currentCell.attr("id")[13]))){
-    cellRow = 10 * parseInt(currentCell.attr("id")[12]);
-    cellRow += parseInt(currentCell.attr("id")[13]);
+function puzzleHeight(){
+  return parseInt($('#puzzle_height').attr('value'));
+}
+
+function puzzleWidth(){
+  return parseInt($('#puzzle_width').attr('value'));
+}
+
+function currentSelectedCell(){
+  return $('.puzzle_cell.selected')
+}
+
+function row(cell){//only call this on puzzle grid cells, plz and thx
+  var value = parseInt(cell.attr("id")[12]);//this just happens to be where in the id the value is, trust me
+  if (!isNaN(parseInt(cell.attr("id")[13]))){//if the prospective next digit is a number
+    value = 10 * value;//turn the current 1s digit into a 10s digit
+    value += parseInt(cell.attr('id')[13]);//and then add the actual 1s digit
   }
-  var cellColumn = parseInt(currentCell.attr("id")[14]);
-  if(cellRow == puzzleHeight){
-    return;
+  return value;
+}
+
+function column(cell){//only call this on puzzle grid cells plz and thx
+  var value = cell.attr("id")[14];
+  if (!isNaN(parseInt(cell.attr('id')[15]))){//if the prospective next digit is a number
+    value = 10 * value;//turn the current 1s digit into a 10s digit
+    value += parseInt(cell.attr('id')[15]);//and then add the actual 1s digit
+  }
+  if (row(cell) > 9){//then we need to shift everything over a character because the row has a 10s digit
+    value = cell.attr("id")[15];
+    if (!isNaN(parseInt(cell.attr('id')[16]))){//if the prospective next digit is a number
+      value = 10 * value;//turn the current 1s digit into a 10s digit
+      value += parseInt(cell.attr('id')[16]);//and then add the actual 1s digit
+    }
+  }
+  return value;
+}
+
+
+function moveSelectedDown(){
+  if(row(currentSelectedCell()) == puzzleHeight()){
+    return;//if the row of the currently selected cell is equal to the puzzle height, don't do anything at all
   }
   var targetString = '#puzzle-cell-'
-  targetString += cellRow + 1;
+  targetString += row(currentSelectedCell()) + 1;
   targetString += '-';
-  targetString += cellColumn;
+  targetString += column(currentSelectedCell());
   var targetCell = $(targetString)
-  currentCell.removeClass('selected');
+  currentSelectedCell().removeClass('selected');
   targetCell.addClass('selected');
 };
 
 function moveSelectedUp(){
-  var puzzleHeight = parseInt($('#puzzle_height').attr('value'));
-  var puzzleWidth = parseInt($('#puzzle_width').attr('value'));
-  var currentCell = $('.puzzle_cell.selected')
-  var cellRow = parseInt(currentCell.attr("id")[12]);
-  if (!isNaN(parseInt(currentCell.attr("id")[13]))){
-    cellRow = 10 * parseInt(currentCell.attr("id")[12]);
-    cellRow += parseInt(currentCell.attr("id")[13]);
-  }
-  var cellColumn = parseInt(currentCell.attr("id")[14]);
-  if(cellRow >= 10){
-    cellColumn = parseInt(currentCell.attr("id")[15]);
-  }
-  if(cellRow == 1){
-    return;
+  if(row(currentSelectedCell()) == 1){
+    return;//if the row of the currently selected cell the top row, don't do anything at all
   }
   var targetString = '#puzzle-cell-'
-  targetString += cellRow - 1;
+  targetString += row(currentSelectedCell()) - 1;
   targetString += '-';
-  targetString += cellColumn;
+  targetString += column(currentSelectedCell());
   var targetCell = $(targetString)
-  currentCell.removeClass('selected');
+  currentSelectedCell().removeClass('selected');
   targetCell.addClass('selected');
 };
 
