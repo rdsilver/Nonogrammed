@@ -2,6 +2,8 @@ $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
 
+
+
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x'); 
@@ -58,5 +60,13 @@ $(document).ready(function() {
       $(this).removeClass("x");
     });
   });  
+
+  $(document).keypress(function(event) {
+    console.log(event.which);
+    if(event.which == 13){
+      $("#puzzle-cell-1-1").addClass('selected');
+    }
+    
+  });
 
 });

@@ -21,7 +21,8 @@
         = "--->"
       %td.right_puzzle_description_column
         = @puzzle_points
-%p.center_text.bold_text.small_margin_top "Completion checks are done automatically!"        
+%p.center_text.bold_text.small_margin_top Completion checks are done automatically!
+%p.center_text.bold_text.small_margin_top Press Enter to start keyboard navigation.
 %div#puzzle_and_buttons_div        
   %table#puzzle_table
     %tr.puzzle_numbers_row
@@ -36,7 +37,7 @@
         %td.puzzle_numbers_column
           = "#"
         - (0..@puzzle_width).each do |w|
-          %td.puzzle_cell{id: "puzzle-cell-#{h}-#{w}"}
+          %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
   =submit_tag "Reset Puzzle" , id: "reset_puzzle"
   =submit_tag "Give me a hint!" , id: "hint_puzzle"
 
