@@ -7,6 +7,7 @@ $(document).ready(function() {
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x'); 
     if(deletion_mode){
       $(this).removeClass('black');
+      $(this).removeClass('x');
     }
     else if(e.which==1){
       $(this).addClass('black');
@@ -19,6 +20,7 @@ $(document).ready(function() {
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x'); 
     if(deletion_mode){
       $(this).removeClass('x');
+      $(this).removeClass('black');
     }
     else $(this).addClass('x');
     mouse_down = true
