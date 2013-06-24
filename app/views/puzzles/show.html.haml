@@ -25,7 +25,7 @@
 %div#puzzle_and_buttons_div        
   %table#puzzle_table
     %tr.puzzle_numbers_row
-      - (0..@puzzle_width).each do |n|
+      - (0..@puzzle_width + 1).each do |n|
         %td
           - unless n == 0
             = "#"
