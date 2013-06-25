@@ -86,9 +86,21 @@ $(document).ready(function() {
 
 
 
+  $('.puzzle_cell').hover(function(e){
+    solution_string = "";
+    $('.puzzle_cell').each(function(){
+      if($(this).hasClass('black'))
+        solution_string += "1";
+      else
+        solution_string += "0";
+    });
+  });
+
+
+
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
-    deletion_mode = $(this).hasClass('black') || $(this).hasClass('x'); 
+    deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
       $(this).removeClass('black');
       $(this).removeClass('x');
@@ -101,14 +113,13 @@ $(document).ready(function() {
 
   $('.puzzle_cell').bind("contextmenu", function(e) {
     e.preventDefault();
-    deletion_mode = $(this).hasClass('black') || $(this).hasClass('x'); 
+    deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode){
       $(this).removeClass('x');
       $(this).removeClass('black');
     }
     else $(this).addClass('x');
-    mouse_down = true
-
+    mouse_down = true;
   });
 
   $('.puzzle_cell').hover(function(e){
