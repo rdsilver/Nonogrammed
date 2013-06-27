@@ -6,6 +6,31 @@ function puzzleWidth(){
   return parseInt($('#puzzle_width').attr('value'));
 }
 
+function checkSolution(){
+  solution_string = "";             // Makes a solution string from all the cells
+  puzzle_number = $(location).attr('href').split("/")[4];
+    $('.puzzle_cell').each(function(){
+      if($(this).hasClass('black'))
+        solution_string += "1";
+      else
+        solution_string += "0";
+    });
+
+  $.ajax({ //Checks to see if solution is correction
+    type:"POST",
+    url: "../puzzles/"+puzzle_number+"/check_solution?solution=" + solution_string,
+    dataType:"json",
+    success: function(data) {
+      var solved = data.html;
+      if(solved)
+      $('#upper_text').html("<h1 style='text-align:center'>SOLVED<h1>");
+    },
+    error: function(xhr, status, error) {
+       console.log(error);
+      }
+    });
+}
+
 function currentSelectedCell(){
   return $('.puzzle_cell.selected')
 }
@@ -87,13 +112,7 @@ $(document).ready(function() {
 
 
   $('.puzzle_cell').hover(function(e){
-    solution_string = "";
-    $('.puzzle_cell').each(function(){
-      if($(this).hasClass('black'))
-        solution_string += "1";
-      else
-        solution_string += "0";
-    });
+    
   });
 
 
@@ -109,6 +128,7 @@ $(document).ready(function() {
       $(this).addClass('black');
     }
     mouse_down = true;
+    checkSolution();
   });
 
   $('.puzzle_cell').bind("contextmenu", function(e) {
@@ -120,6 +140,7 @@ $(document).ready(function() {
     }
     else $(this).addClass('x');
     mouse_down = true;
+    checkSolution();
   });
 
   $('.puzzle_cell').hover(function(e){
@@ -136,6 +157,7 @@ $(document).ready(function() {
       else{
         $(this).addClass('x');
       }
+      checkSolution();
     }
   });
 

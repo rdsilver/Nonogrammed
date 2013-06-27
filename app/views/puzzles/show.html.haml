@@ -2,7 +2,7 @@
   %table.puzzle_description_table
     %tr
       %td.left_puzzle_description_column
-        Puzzle Number
+        Puzzle Number 
       %td.placeholder_column
         = "--->"
       %td.right_puzzle_description_column
@@ -21,8 +21,9 @@
         = "--->"
       %td.right_puzzle_description_column
         = @puzzle_points
-%p.center_text.bold_text.small_margin_top Completion checks are done automatically!
-%p.center_text.bold_text.small_margin_top Press Enter to start keyboard navigation. You can navigate using the W, A, S, and D keys.
+%div#upper_text        
+  %p.center_text.bold_text.small_margin_top Completion checks are done automatically!
+  %p.center_text.bold_text.small_margin_top Press Enter to start keyboard navigation. You can navigate using the W, A, S, and D keys.
 .hidden{id: "puzzle_height", value: @puzzle_height}
 .hidden{id: "puzzle_width", value: @puzzle_width}
 %div#puzzle_and_buttons_div        

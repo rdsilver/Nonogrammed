@@ -76,6 +76,16 @@ class PuzzlesController < ApplicationController
     end
   end
 
+  def check_solution
+    puzzle = Puzzle.find(params[:id])
+    solved= puzzle.grid.solution == params[:solution].to_s
+  
+    respond_to do |format|
+    response = { :status => "ok", :message => "Success!", :html => solved}
+    format.json { render json: response }
+   end
+  end
+
   # DELETE /puzzles/1
   # DELETE /puzzles/1.json
   def destroy

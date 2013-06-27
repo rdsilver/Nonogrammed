@@ -4,8 +4,11 @@ Nonogrammed::Application.routes.draw do
   resources :grids
 
 
-  resources :puzzles
-
+  resources :puzzles do
+    member do
+      post :check_solution
+    end
+  end
 
   resources :users
 
