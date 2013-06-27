@@ -20,6 +20,7 @@ class PuzzlesController < ApplicationController
     @puzzle_height = puzzle.grid.height
     @puzzle_width = puzzle.grid.width
     @puzzle_solution = puzzle.grid.solution
+    @puzzle_number = puzzle.id
 
 
     respond_to do |format|

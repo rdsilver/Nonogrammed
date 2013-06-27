@@ -8,7 +8,7 @@ function puzzleWidth(){
 
 function checkSolution(){
   solution_string = "";             // Makes a solution string from all the cells
-  puzzle_number = $(location).attr('href').split("/")[4];
+  puzzle_number = $('#puzzle_number').attr('value')
     $('.puzzle_cell').each(function(){
       if($(this).hasClass('black'))
         solution_string += "1";
