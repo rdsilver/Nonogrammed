@@ -21,7 +21,11 @@ class PuzzlesController < ApplicationController
     @puzzle_width = puzzle.grid.width
     @puzzle_solution = puzzle.grid.solution
     @puzzle_number = puzzle.id
+    @string_for_row = Hash.new("")
 
+    #Find hash
+    @puzzle_solution = @puzzle_solution.split('').each_slice(@puzzle_width).map(&:join)
+    puts @puzzle_solution
 
     respond_to do |format|
       format.html # show.html.erb

@@ -39,7 +39,7 @@
     - (0...@puzzle_height).each do |h|
       %tr
         %td.puzzle_numbers_column
-          = "#"
+          = "d"
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
   =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "puzzle_button"
