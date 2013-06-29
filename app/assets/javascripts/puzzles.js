@@ -105,6 +105,20 @@ function moveSelectedLeft(){
   targetCell.addClass('selected');
 }
 
+function toggleSelectedCellBlack(){
+  if (currentSelectedCell().hasClass('black')){
+    currentSelectedCell().removeClass('black');
+  }
+  else currentSelectedCell().addClass('black');
+}
+
+function toggleSelectedCellX(){
+  if (currentSelectedCell().hasClass('x')){
+    currentSelectedCell().removeClass('x');
+  }
+  else currentSelectedCell().addClass('x');
+}
+
 $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
@@ -179,8 +193,12 @@ $(document).ready(function() {
   });  
 
   $(document).keypress(function(event) {
+    console.log(event.which);
     if(event.which == 13){//Enter
-      $("#puzzle-cell-1-1").addClass('selected');
+      if ($('.puzzle_cell.selected').length == 0){//if no cell is selected,
+        $("#puzzle-cell-1-1").addClass('selected');//automatically selects the first cell
+      }
+      else currentSelectedCell().removeClass('selected');
     }
     if(event.which == 115){//S
       moveSelectedDown();
@@ -193,6 +211,12 @@ $(document).ready(function() {
     }
     else if(event.which == 100){//D
       moveSelectedRight();
+    }
+    else if(event.which == 98){//B
+      toggleSelectedCellBlack();
+    }
+    else if(event.which == 120){//x
+      toggleSelectedCellX();
     }
   });
 
