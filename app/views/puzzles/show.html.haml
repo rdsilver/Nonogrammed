@@ -22,8 +22,8 @@
       %td.right_puzzle_description_column
         = @puzzle_points
 %div#upper_text        
-  %p.center_text.bold_text.small_margin_top Completion checks are done automatically!
   %p.center_text.bold_text.small_margin_top Press Enter to start keyboard navigation. You can navigate using the W, A, S, and D keys.
+%div#solved_or_not  
 .hidden{id: "puzzle_height", value: @puzzle_height}
 .hidden{id: "puzzle_width", value: @puzzle_width}
 .hidden{id: "puzzle_number", value: @puzzle_number}
@@ -42,7 +42,9 @@
           = "#"
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
-  =submit_tag "Reset Puzzle" , id: "reset_puzzle"
-  =submit_tag "Give me a hint!" , id: "hint_puzzle"
+  =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "puzzle_button"
+  =submit_tag "Check Solution!" , id: "check_solution", class: "puzzle_button"
+  =submit_tag "Give me a hint!" , id: "hint_puzzle", class: "puzzle_button"
+
 
 

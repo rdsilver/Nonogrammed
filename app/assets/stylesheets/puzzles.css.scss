@@ -36,7 +36,7 @@
 
 #puzzle_table{
   margin-top: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   width: 200 px;
   margin-left: auto;
   margin-right: auto;
@@ -87,10 +87,7 @@
   margin-left: auto;
 }
 
-#hint_puzzle{
-  margin-left:105px;
+#solved_or_not {
+  height:25px;
 }
 
-#reset_puzzle{
-  margin-left:90px;
-}

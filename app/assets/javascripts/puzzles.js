@@ -23,7 +23,8 @@ function checkSolution(){
     success: function(data) {
       var solved = data.html;
       if(solved)
-      $('#upper_text').html("<h1 style='text-align:center'>SOLVED<h1>");
+      $('#solved_or_not').html("<h3 style='text-align:center; color:green'>SOLVED<h1>");
+      else $('#solved_or_not').html("<h3 style='text-align:center; color:red'>WRONG<h1>");
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -128,7 +129,6 @@ $(document).ready(function() {
       $(this).addClass('black');
     }
     mouse_down = true;
-    checkSolution();
   });
 
   $('.puzzle_cell').bind("contextmenu", function(e) {
@@ -140,7 +140,6 @@ $(document).ready(function() {
     }
     else $(this).addClass('x');
     mouse_down = true;
-    checkSolution();
   });
 
   $('.puzzle_cell').hover(function(e){
@@ -157,13 +156,16 @@ $(document).ready(function() {
       else{
         $(this).addClass('x');
       }
-      checkSolution();
     }
   });
 
 
   $('#puzzle_and_buttons_div').on('mousedown',function(e){ /*Fixes unwanted highlighting*/
     e.preventDefault(); 
+  });
+
+  $('#check_solution').on('click', function(){
+    checkSolution();
   });
 
   $('body').on('mouseup', function(e){
