@@ -21,11 +21,38 @@ class PuzzlesController < ApplicationController
     @puzzle_width = puzzle.grid.width
     @puzzle_solution = puzzle.grid.solution
     @puzzle_number = puzzle.id
-    @string_for_row = Hash.new("")
 
-    #Find hash
+
+    #Fill in number logic (will go into model method
+    @string_for_row = Hash.new("")
+    @string_for_column = Hash.new("")
     @puzzle_solution = @puzzle_solution.split('').each_slice(@puzzle_width).map(&:join)
     puts @puzzle_solution
+    @puzzle_solution.each_with_index { |string , index|
+     ones_array = string.split("0")
+     ones_array.each do |x|
+       if(x.length>0)
+       @string_for_row[index] += x.length.to_s + " "
+       end
+     end
+    }
+
+    @puzzle_solution = Array.new 
+    puzzle.grid.solution.split('').each_slice(@puzzle_width).map(&:join).each { |x|
+      @puzzle_solution << x.to_s.scan(/.{1,1}/).join(',').split(',')
+    }
+    @puzzle_solution = @puzzle_solution.transpose
+    @puzzle_solution = @puzzle_solution.flatten
+    @puzzle_solution = @puzzle_solution.join('')
+    @puzzle_solution = @puzzle_solution.split('').each_slice(@puzzle_height).map(&:join)
+    @puzzle_solution.each_with_index { |string , index|
+     ones_array = string.split("0")
+     ones_array.each do |x|
+       if(x.length>0)
+       @string_for_column[index] += x.length.to_s + " "
+       end
+     end
+    }
 
     respond_to do |format|
       format.html # show.html.erb
