@@ -1,17 +1,21 @@
 def make_solution_string(root_of_size)
   s = ""
-  (root_of_size * root_of_size).times do 
-    s += ["0","1"].sample
+  length_of_solution = (root_of_size * root_of_size) 
+  length_of_solution.times do 
+    s += [0,1].sample.to_s
   end
+  return s
 end
+
 namespace :puzzle_data do 
   task :create_puzzles_and_grids => :environment do
-    50.times do |x|
+    (1...50).each do |x|
       #Puzzle , id , difficulty, grid_id , points 
       #Grid, id , height , width, solution , puzzle_id
-      Puzzle.create(difficulty: x , grid_id: x , points: x)
+      p = Puzzle.create(difficulty: x , points: x)
       solution = make_solution_string(x)
-      Grid.create(height: x+1, width: x+1, solution: solution, puzzle_id: x+1000)
+      g= Grid.create(height: x, width: x, solution: solution, puzzle_id: p.id)
+      p.update_attributes(grid_id: g.id)
     end
   end
 end
