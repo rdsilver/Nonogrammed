@@ -50,11 +50,11 @@
   }
   .puzzle_numbers_row{
     background: #bbb;
-    height: 50px;
+    height: 100px;
   }
   .puzzle_numbers_column{
     background: #bbb;
-    width: 50px;
+    width: 100px;
   }
   .puzzle_cell{
     background: #fff;
@@ -89,5 +89,10 @@
 
 #solved_or_not {
   height:25px;
+}
+
+.seperate_numbers{
+  height:1px;
+  margin-bottom:1px;
 }
 

@@ -23,7 +23,7 @@ class PuzzlesController < ApplicationController
     @puzzle_number = puzzle.id
 
 
-    #Fill in number logic (will go into model method
+    #Fill in number logic (will go into model method)
     @string_for_row = Hash.new("")
     @string_for_column = Hash.new("")
     @puzzle_solution = @puzzle_solution.split('').each_slice(@puzzle_width).map(&:join)

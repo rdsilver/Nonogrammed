@@ -33,7 +33,9 @@
       %td.corner
       - (0..@puzzle_width-1).each do |n|
         %td
-          =  @string_for_column[n]
+          -@string_for_column[n].split("").each do |i|
+            .seperate_numbers
+            =i
     - (0...@puzzle_height).each do |h|
       %tr
         %td.puzzle_numbers_column
