@@ -54,7 +54,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :puzzles, "Puzzles", puzzles_path, class: "navbarHeader"
     primary.item :grids, "Grids", grids_path, class: "navbarHeader"
 
-
     # Add an item which has a sub navigation (same params, but with block)
     #primary.item :key_2, 'name', url, options do |sub_nav|
       # Add an item to the sub navigation (same params again)
