@@ -4,6 +4,7 @@
 
 .puzzle_description
 {
+  color:steelblue;
 	text-align:center;
 	font-size:25px;
 	width:400px;
@@ -81,10 +82,23 @@
   
 }
 
-#puzzle_and_buttons_div {
+#puzzle {
   max-width:500px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.puzzle_buttons
+{
+  text-align:center;
+}
+
+input{
+  background: #6Cf;
+}
+
+input:hover {
+    background: #69c;
 }
 
 #solved_or_not {
@@ -95,4 +109,26 @@
   height:1px;
   margin-bottom:1px;
 }
+
+#sidebar_left
+{
+  position:fixed;
+  top:0px;
+  left:5%;
+  background-color: #6Cf;
+  width:2px;
+  height:100%;
+}
+
+#sidebar_right
+{
+  position:fixed;
+  right:5%;
+  top:0px;
+  background-color: #6Cf;
+  width:2px;
+  height:100%;
+}
+
+
 
