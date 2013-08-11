@@ -32,10 +32,6 @@ function checkSolution(){
     });
 }
 
-function currentSelectedCell(){
-  return $('.puzzle_cell.selected')
-}
-
 function row(cell){//only call this on puzzle grid cells, plz and thx
   var value = parseInt(cell.attr("id")[12]);//this just happens to be where in the id the value is, trust me
   if (!isNaN(parseInt(cell.attr("id")[13]))){//if the prospective next digit is a number
@@ -70,41 +66,6 @@ function findCell(row, col){
 }
 
 
-function moveSelectedDown(){
-  if(row(currentSelectedCell()) == puzzleHeight()){
-    return;//if the row of the currently selected cell is equal to the puzzle height, don't do anything at all
-  }
-  var targetCell = findCell(row(currentSelectedCell()) + 1, column(currentSelectedCell()));
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-};
-
-function moveSelectedUp(){
-  if(row(currentSelectedCell()) == 1){
-    return;//if the row of the currently selected cell the top row, don't do anything at all
-  }
-  var targetCell = findCell(row(currentSelectedCell()) - 1, column(currentSelectedCell()));
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-};
-
-function moveSelectedRight(){
-  if(column(currentSelectedCell()) == puzzleWidth()){
-    return;
-  }
-  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) + 1);
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-}
-
-function moveSelectedLeft(){
-  if(column(currentSelectedCell()) == 1){
-    return;
-  }
-  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) - 1);
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-}
 
 function toggleSelectedCellBlack(){
   if (currentSelectedCell().hasClass('black')){
@@ -118,6 +79,23 @@ function toggleSelectedCellX(){
     currentSelectedCell().removeClass('x');
   }
   else currentSelectedCell().addClass('x');
+}
+
+var time=0;
+function timer()
+{
+  time+=1;
+  $('.timer').html("<p>"+ time+"</p>");
+}
+
+function resetTimer()
+{
+  time=0;
+  $('.timer').html("<p>"+ 0+"</p>");
+}
+
+window.onload = function (){
+  setInterval(timer,1000)
 }
 
 $(document).ready(function() {
@@ -192,8 +170,12 @@ $(document).ready(function() {
       $(this).removeClass('black');
       $(this).removeClass("x");
     });
+    resetTimer();
   });  
 
+});
+
+  /*
   $(document).keypress(function(event) {
     console.log(event.which);
     if(event.which == 13){//Enter
@@ -222,4 +204,44 @@ $(document).ready(function() {
     }
   });
 
-});
+  function moveSelectedDown(){
+  if(row(currentSelectedCell()) == puzzleHeight()){
+    return;//if the row of the currently selected cell is equal to the puzzle height, don't do anything at all
+  }
+  var targetCell = findCell(row(currentSelectedCell()) + 1, column(currentSelectedCell()));
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+};
+
+function moveSelectedUp(){
+  if(row(currentSelectedCell()) == 1){
+    return;//if the row of the currently selected cell the top row, don't do anything at all
+  }
+  var targetCell = findCell(row(currentSelectedCell()) - 1, column(currentSelectedCell()));
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+};
+
+function moveSelectedRight(){
+  if(column(currentSelectedCell()) == puzzleWidth()){
+    return;
+  }
+  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) + 1);
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+}
+
+function moveSelectedLeft(){
+  if(column(currentSelectedCell()) == 1){
+    return;
+  }
+  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) - 1);
+  currentSelectedCell().removeClass('selected');
+  targetCell.addClass('selected');
+}
+
+function currentSelectedCell(){
+  return $('.puzzle_cell.selected')
+}
+ */
+

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+/*
 var rgb = [250,2,250]
 var dir = [-5,5,-5]
 
@@ -38,4 +39,6 @@ function changeGlowOfHeader(){
 	$(".glow").css('text-shadow' , '0 0 10px rgb('+ rgb[0] + ',' +rgb[1]+','+rgb[2]+')');
 	$('#sidebar_left').css('background-color', 'rgb('+ rgb[0] + ',' +rgb[1]+','+rgb[2]+')');
 	$('#sidebar_right').css('background-color', 'rgb('+ rgb[0] + ',' +rgb[1]+','+rgb[2]+')');
+	$('input').css('border', '1px solid rgb('+ rgb[0] + ',' +rgb[1]+','+rgb[2]+')');
 }
+*/

@@ -12,5 +12,11 @@ Nonogrammed::Application.routes.draw do
 
   resources :users
 
+  resources :dashboard do
+  	member do
+  	 post :show
+  	end
+  end
+
   root :to => 'dashboard#show'  
 end

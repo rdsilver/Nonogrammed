@@ -1,29 +1,39 @@
-%h2.center_text.cyanish.glow= "Puzzle #{@puzzle_name}"
-%div#solved_or_not  
 .hidden{id: "puzzle_height", value: @puzzle_height}
 .hidden{id: "puzzle_width", value: @puzzle_width}
 .hidden{id: "puzzle_number", value: @puzzle_number}
-%div#sidebar_left
-%div#sidebar_right
-%div#puzzle     
-  %table#puzzle_table
+%div.puzzle_buttons
+  =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "one-edge-shadow" 
+  =submit_tag "Check Solution!" , id: "check_solution", class: "one-edge-shadow"
+  =submit_tag "Give me a hint!" , id: "hint_puzzle", class: "one-edge-shadow" 
+%br
+%div.timer.center
+  %p 0 
+%div#puzzle   
+  %table#puzzle_table.one-edge-shadow   
     %tr.puzzle_numbers_row
       %td.corner
       - (0..@puzzle_width-1).each do |n|
         %td
           -@string_for_column[n].split("").each do |i|
             .seperate_numbers
-            =i
+            %b=i
     - (0...@puzzle_height).each do |h|
       %tr
         %td.puzzle_numbers_column
-          = @string_for_row[h]
+          %b= @string_for_row[h]
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
+%div#solved_or_not  
+
 %div.puzzle_buttons
-  =submit_tag "Reset Puzzle" , id: "reset_puzzle" 
-  =submit_tag "Check Solution!" , id: "check_solution"
-  =submit_tag "Give me a hint!" , id: "hint_puzzle"
+  = form_tag ({controller:'dashboard' , action: 'show'}) do
+    = select_tag 'size', options_for_select((1..25).to_a.map{|s| ["#{s}X#{s}", s]}, @puzzle_width) , class: 'one-edge-shadow'
+    = submit_tag 'New Puzzle' , class: 'one-edge-shadow'
+
+    
+
+
+
 
 
 

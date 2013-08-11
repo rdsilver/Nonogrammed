@@ -1,6 +1,13 @@
 body {
-  background-image: url('black_denim.jpg');
-  color: #333;
+  background-image: -ms-radial-gradient(center top, circle farthest-corner, #A8C47F  0%, #003619 100%);
+  background-image: -moz-radial-gradient(center top, circle farthest-corner, #A8C47F  0%, #003619 100%);
+  background-image: -o-radial-gradient(center top, circle farthest-corner, #A8C47F  0%, #003619 100%);
+  background-image: -webkit-gradient(radial, center top, 0, center top, 553, color-stop(0, #A8C47F ), color-stop(1, #003619));
+  background-image: -webkit-radial-gradient(center top, circle farthest-corner, #A8C47F  0%, #003619 100%);
+  background-image: radial-gradient(circle farthest-corner at center top, #A8C47F  0%, #003619 100%);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  color:#003619;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
@@ -8,7 +15,7 @@ body {
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 10px;
 }
 
