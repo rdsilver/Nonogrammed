@@ -7,6 +7,7 @@ Nonogrammed::Application.routes.draw do
   resources :puzzles do
     member do
       post :check_solution
+      post :give_hint
     end
   end
 

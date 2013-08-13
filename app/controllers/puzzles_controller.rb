@@ -113,9 +113,32 @@ class PuzzlesController < ApplicationController
     solved= puzzle.grid.solution == params[:solution].to_s
   
     respond_to do |format|
-    response = { :status => "ok", :message => "Success!", :html => solved}
-    format.json { render json: response }
-   end
+      response = { :status => "ok", :message => "Success!", :html => solved}
+      format.json { render json: response }
+    end
+  end
+
+  def give_hint
+    puzzle = Puzzle.find(params[:id])
+    possible_hints = Array.new
+
+    params[:solution].to_s.split('').each_with_index do |c,x|
+      if(puzzle.grid.solution[x] != c )
+        possible_hints << x
+      end
+    end
+
+    if possible_hints.count > 0
+      index = possible_hints.sample
+      hint = puzzle.grid.solution[index] + " " + index.to_s
+    else
+      hint = "-1 -1"
+    end
+
+    respond_to do |format|
+      response = { :status => "ok", :message => "Success!", :html => hint}
+      format.json { render json: response }
+    end
   end
 
   # DELETE /puzzles/1

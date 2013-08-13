@@ -3,11 +3,11 @@
 .hidden{id: "puzzle_number", value: @puzzle_number}
 %div.puzzle_buttons
   =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "one-edge-shadow" 
-  =submit_tag "Check Solution!" , id: "check_solution", class: "one-edge-shadow"
-  =submit_tag "Give me a hint!" , id: "hint_puzzle", class: "one-edge-shadow" 
+  =submit_tag "Check Solution" , id: "check_solution", class: "one-edge-shadow"
+  =submit_tag "Give Hint" , id: "hint_puzzle", class: "one-edge-shadow" 
 %br
 %div.timer.center
-  %p 0 
+  %p.bold 00:00
 %div#puzzle   
   %table#puzzle_table.one-edge-shadow   
     %tr.puzzle_numbers_row

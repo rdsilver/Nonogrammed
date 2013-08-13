@@ -6,15 +6,57 @@ function puzzleWidth(){
   return parseInt($('#puzzle_width').attr('value'));
 }
 
-function checkSolution(){
-  solution_string = "";             // Makes a solution string from all the cells
-  puzzle_number = $('#puzzle_number').attr('value')
+function pad (str, max) {
+  return str.length < max ? pad("0" + str, max) : str;
+}
+
+function getCurrentBoard()
+{
+  solution_string = "";
     $('.puzzle_cell').each(function(){
       if($(this).hasClass('black'))
         solution_string += "1";
       else
         solution_string += "0";
     });
+
+  return solution_string;
+}
+
+function giveHint()
+{
+
+  solution_string = getCurrentBoard();
+  puzzle_number = $('#puzzle_number').attr('value')
+
+  $.ajax({
+    type:"POST",
+    url: "../puzzles/"+puzzle_number+"/give_hint?solution=" + solution_string,
+    dataType:"json",
+    success: function(data) {
+      on_or_off = data.html.split(" ")[0];
+      index = data.html.split(" ")[1];
+      if(index>=0)
+      if(on_or_off == 1){
+        $('td.puzzle_cell:eq('+index+')').addClass('black');
+        $('td.puzzle_cell:eq('+index+')').removeClass('x');
+      }
+      else{
+        $('td.puzzle_cell:eq('+index+')').addClass('x');
+        $('td.puzzle_cell:eq('+index+')').removeClass('black');
+      }
+
+    },
+    error: function(xhr, status, error) {
+       console.log(error);
+    }
+  });
+}
+
+function checkSolution(){
+  solution_string = getCurrentBoard();// Makes a solution string from all the cells
+  puzzle_number = $('#puzzle_number').attr('value')
+  
 
   $.ajax({ //Checks to see if solution is correction
     type:"POST",
@@ -23,7 +65,10 @@ function checkSolution(){
     success: function(data) {
       var solved = data.html;
       if(solved)
+      {
       $('#solved_or_not').html("<h3 style='text-align:center; color:green'>SOLVED<h1>");
+      clearInterval(intervalId);
+      }
       else $('#solved_or_not').html("<h3 style='text-align:center; color:red'>WRONG<h1>");
     },
     error: function(xhr, status, error) {
@@ -85,17 +130,23 @@ var time=0;
 function timer()
 {
   time+=1;
-  $('.timer').html("<p>"+ time+"</p>");
+  minutes = Math.floor(time/60)+'';
+  seconds = time%60+'';
+  $('.timer').html("<p class='bold'>"+pad(minutes,2)+':'+pad(seconds,2)+"</p>");
 }
 
 function resetTimer()
 {
   time=0;
-  $('.timer').html("<p>"+ 0+"</p>");
+  minutes = time/60+'';
+  seconds = time%60+'';
+  $('.timer').html("<p class='bold'>"+pad(minutes,2)+':'+pad(seconds,2)+"</p>");
+  clearInterval(intervalId);
+  intervalId = setInterval(timer,1000);
 }
 
 window.onload = function (){
-  setInterval(timer,1000)
+  intervalId = setInterval(timer,1000);
 }
 
 $(document).ready(function() {
@@ -104,9 +155,18 @@ $(document).ready(function() {
 
 
 
-  $('.puzzle_cell').hover(function(e){
-    
-  });
+  $("#puzzle_table").delegate('td.puzzle_cell','mouseover mouseout', function(e) {
+    row_num = $(this).attr('id').split('-')[2] -1;
+    col_num = $(this).attr('id').split('-')[3];
+   if (e.type == 'mouseover') {
+      $('tr.puzzle_numbers_row td:eq('+col_num+')').addClass("hover");
+      $('td.puzzle_numbers_column:eq('+row_num+')').addClass("hover");
+    }
+    else {
+      $('tr.puzzle_numbers_row td:eq('+col_num+')').removeClass("hover");
+      $('td.puzzle_numbers_column:eq('+row_num+')').removeClass("hover");
+    }
+   });
 
 
 
@@ -158,6 +218,10 @@ $(document).ready(function() {
 
   $('#check_solution').on('click', function(){
     checkSolution();
+  });
+
+  $('#hint_puzzle').on('click', function(){
+    giveHint();
   });
 
   $('body').on('mouseup', function(e){
