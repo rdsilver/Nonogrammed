@@ -66,10 +66,10 @@ function checkSolution(){
       var solved = data.html;
       if(solved)
       {
-      $('#solved_or_not').html("<h3 style='text-align:center; color:green'>SOLVED<h1>");
+      $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h1>");
       clearInterval(intervalId);
       }
-      else $('#solved_or_not').html("<h3 style='text-align:center; color:red'>WRONG<h1>");
+      else $('#solved_or_not').html("<h3 style='text-align:center; color:#e45846'>WRONG<h1>");
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -159,12 +159,12 @@ $(document).ready(function() {
     row_num = $(this).attr('id').split('-')[2] -1;
     col_num = $(this).attr('id').split('-')[3];
    if (e.type == 'mouseover') {
-      $('tr.puzzle_numbers_row td:eq('+col_num+')').addClass("hover");
-      $('td.puzzle_numbers_column:eq('+row_num+')').addClass("hover");
+      $('tr.puzzle_numbers_row td:eq('+col_num+')').addClass("hover_highlight");
+      $('td.puzzle_numbers_column:eq('+row_num+')').addClass("hover_highlight");
     }
     else {
-      $('tr.puzzle_numbers_row td:eq('+col_num+')').removeClass("hover");
-      $('td.puzzle_numbers_column:eq('+row_num+')').removeClass("hover");
+      $('tr.puzzle_numbers_row td:eq('+col_num+')').removeClass("hover_highlight");
+      $('td.puzzle_numbers_column:eq('+row_num+')').removeClass("hover_highlight");
     }
    });
 

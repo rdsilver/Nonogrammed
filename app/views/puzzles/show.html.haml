@@ -1,13 +1,23 @@
 .hidden{id: "puzzle_height", value: @puzzle_height}
 .hidden{id: "puzzle_width", value: @puzzle_width}
 .hidden{id: "puzzle_number", value: @puzzle_number}
-%div.puzzle_buttons
-  =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "one-edge-shadow" 
-  =submit_tag "Check Solution" , id: "check_solution", class: "one-edge-shadow"
-  =submit_tag "Give Hint" , id: "hint_puzzle", class: "one-edge-shadow" 
-%br
-%div.timer.center
-  %p.bold 00:00
+
+%div#sidebar
+  %div#logo.center
+    = image_tag "logo.png"
+  %nav.navbuttons
+    %div.upper
+      = form_tag ({controller:'dashboard' , action: 'show'}) do
+        = submit_tag 'New Puzzle' , class: 'yellowbutton inline'
+        = select_tag 'size', options_for_select((5..20).to_a.map{|s| ["#{s}X#{s}", s]}, @puzzle_width) , class: 'inline'
+    %div.timer.center
+      %p.bold 00:00
+    %div.morebuttons
+      =submit_tag "Check Solution" , id: "check_solution", class: "greybutton"
+      =submit_tag "Give Hint" , id: "hint_puzzle", class: "greybutton" 
+      =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton" 
+    %div#solved_or_not
+
 %div#puzzle   
   %table#puzzle_table.one-edge-shadow   
     %tr.puzzle_numbers_row
@@ -23,12 +33,11 @@
           %b= @string_for_row[h]
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
-%div#solved_or_not  
 
-%div.puzzle_buttons
-  = form_tag ({controller:'dashboard' , action: 'show'}) do
-    = select_tag 'size', options_for_select((1..25).to_a.map{|s| ["#{s}X#{s}", s]}, @puzzle_width) , class: 'one-edge-shadow'
-    = submit_tag 'New Puzzle' , class: 'one-edge-shadow'
+//%div#stats
+// %h2 Stats 
+// = "Times Solved: #{@puzzle_times_solved}"
+
 
     
 

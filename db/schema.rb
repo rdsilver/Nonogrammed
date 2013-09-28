@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130622223919) do
+ActiveRecord::Schema.define(:version => 20130926041547) do
 
   create_table "grids", :force => true do |t|
     t.integer  "height"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(:version => 20130622223919) do
     t.integer  "difficulty"
     t.integer  "grid_id"
     t.integer  "points"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "times_solved"
   end
 
   create_table "users", :force => true do |t|

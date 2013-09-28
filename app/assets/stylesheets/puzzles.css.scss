@@ -44,8 +44,9 @@
   user-select: none;
   margin-top: 10px;
   width: 200 px;
-  margin-left: auto;
+  margin-left: 200px;
   margin-right: auto;
+  color:#643b0e;
   table, tr, td{
     border: 1px solid black;
   }
@@ -55,16 +56,16 @@
     text-align: center;
   }
   .puzzle_numbers_row{
-    background: #90CA89;
+    background: #ffd989;
     vertical-align:bottom;
   }
   .puzzle_numbers_column{
-    background: #90CA89;
+    background: #ffd989;
     text-align:right;
     white-space: nowrap
   }
   .puzzle_cell{
-    background: #E3FFE0;
+    background: #FFFBF1;
   }
   .puzzle_cell.black{
     background-image:url("/assets/black_cell.png");
@@ -100,22 +101,18 @@
   text-align:center;
 }
 
-input{
-  margin-top:10px;
-  margin-bottom:10px;
-  background: rgba(148,196,135,.9);
-  border-color:white;
-  border:1px solid white;
-  -moz-border-radius: 15px;
-  border-radius: 5px;
-}
-
-input:hover {
-    background: #83B376
-}
-
 #solved_or_not {
   height:25px;
+}
+
+#stats {
+  position: fixed;
+  left: 700px;
+  top: 0;
+
+  h2{
+    margin-top:-5px;
+  }
 }
 
 .seperate_numbers{
@@ -137,31 +134,9 @@ select{
   font-weight:bold;
 }
 
-.hover{
-  background: #90EE89 !important;
+.hover_highlight {
+    background: #FFBB66 !important;
 }
-
-/*
-#sidebar_left
-{
-  position:fixed;
-  top:0px;
-  left:5%;
-  background-color: #6Cf;
-  width:2px;
-  height:100%;
-}
-
-#sidebar_right
-{
-  position:fixed;
-  right:5%;
-  top:0px;
-  background-color: #6Cf;
-  width:2px;
-  height:100%;
-}
-*/
 
 
 

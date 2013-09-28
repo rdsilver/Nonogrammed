@@ -21,6 +21,7 @@ class PuzzlesController < ApplicationController
     @puzzle_width = puzzle.grid.width
     @puzzle_solution = puzzle.grid.solution
     @puzzle_number = puzzle.id
+    @puzzle_times_solved = puzzle.times_solved
 
 
     #Fill in number logic (will go into model method)
@@ -111,6 +112,12 @@ class PuzzlesController < ApplicationController
   def check_solution
     puzzle = Puzzle.find(params[:id])
     solved= puzzle.grid.solution == params[:solution].to_s
+
+    #
+    #if(solved)
+    #  Puzzle.find(params[:id]).increment!(:times_solved, by =1)
+   # end
+
   
     respond_to do |format|
       response = { :status => "ok", :message => "Success!", :html => solved}
