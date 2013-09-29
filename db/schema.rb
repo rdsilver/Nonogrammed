@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926041547) do
+ActiveRecord::Schema.define(:version => 20130929053341) do
 
   create_table "grids", :force => true do |t|
     t.integer  "height"
     t.integer  "width"
-    t.string   "solution"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "solution",   :limit => 255
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "puzzle_id"
   end
 
