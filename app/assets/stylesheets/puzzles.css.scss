@@ -55,6 +55,7 @@
     height: 18px;
     text-align: center;
   }
+
   .puzzle_numbers_row{
     background: #ffd989;
     vertical-align:bottom;
@@ -67,6 +68,7 @@
   .puzzle_cell{
     background: #FFFBF1;
   }
+
   .puzzle_cell.black{
     background-image:url("/assets/black_cell.png");
     background-size:16px 16px;
