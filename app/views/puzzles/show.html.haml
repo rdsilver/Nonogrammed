@@ -24,13 +24,20 @@
       %td.corner
       - (0..@puzzle_width-1).each do |n|
         %td
-          -@string_for_column[n].split("").each do |i|
+          -@string_for_column[n].split(" ").each do |i|
             .seperate_numbers
-            %b=i
+            -if i.length==1
+              %b=i
+            -else
+              %b.double_digits=i
     - (0...@puzzle_height).each do |h|
       %tr
         %td.puzzle_numbers_column
-          %b= @string_for_row[h]
+          -@string_for_row[h].split(" ").each do |i|
+            -if i.length==1
+              %b=i
+            -else
+              %b.double_digits=i
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
 
