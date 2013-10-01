@@ -23,6 +23,14 @@ function getCurrentBoard()
   return solution_string;
 }
 
+function check_solved_row_or_column(){
+  /*
+  $('.puzzle_numbers_column').each(function (){
+      console.log($(this).children("b").text());
+    });
+*/
+}
+
 function giveHint()
 {
 
@@ -172,6 +180,7 @@ $(document).ready(function() {
 
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
+    check_solved_row_or_column();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
       $(this).removeClass('black');
@@ -185,6 +194,7 @@ $(document).ready(function() {
 
   $('.puzzle_cell').bind("contextmenu", function(e) {
     e.preventDefault();
+    check_solved_row_or_column();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode){
       $(this).removeClass('x');
@@ -210,7 +220,6 @@ $(document).ready(function() {
       }
     }
   });
-
 
   $('#puzzle_and_buttons_div').on('mousedown',function(e){ /*Fixes unwanted highlighting*/
     e.preventDefault(); 
@@ -238,74 +247,4 @@ $(document).ready(function() {
   });  
 
 });
-
-  /*
-  $(document).keypress(function(event) {
-    console.log(event.which);
-    if(event.which == 13){//Enter
-      if ($('.puzzle_cell.selected').length == 0){//if no cell is selected,
-        $("#puzzle-cell-1-1").addClass('selected');//automatically selects the first cell
-      }
-      else currentSelectedCell().removeClass('selected');
-    }
-    if(event.which == 115){//S
-      moveSelectedDown();
-    }
-    else if(event.which == 119){//W
-      moveSelectedUp();
-    }
-    else if(event.which == 97){//A
-      moveSelectedLeft();
-    }
-    else if(event.which == 100){//D
-      moveSelectedRight();
-    }
-    else if(event.which == 98){//B
-      toggleSelectedCellBlack();
-    }
-    else if(event.which == 120){//x
-      toggleSelectedCellX();
-    }
-  });
-
-  function moveSelectedDown(){
-  if(row(currentSelectedCell()) == puzzleHeight()){
-    return;//if the row of the currently selected cell is equal to the puzzle height, don't do anything at all
-  }
-  var targetCell = findCell(row(currentSelectedCell()) + 1, column(currentSelectedCell()));
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-};
-
-function moveSelectedUp(){
-  if(row(currentSelectedCell()) == 1){
-    return;//if the row of the currently selected cell the top row, don't do anything at all
-  }
-  var targetCell = findCell(row(currentSelectedCell()) - 1, column(currentSelectedCell()));
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-};
-
-function moveSelectedRight(){
-  if(column(currentSelectedCell()) == puzzleWidth()){
-    return;
-  }
-  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) + 1);
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-}
-
-function moveSelectedLeft(){
-  if(column(currentSelectedCell()) == 1){
-    return;
-  }
-  var targetCell = findCell(row(currentSelectedCell()), column(currentSelectedCell()) - 1);
-  currentSelectedCell().removeClass('selected');
-  targetCell.addClass('selected');
-}
-
-function currentSelectedCell(){
-  return $('.puzzle_cell.selected')
-}
- */
 

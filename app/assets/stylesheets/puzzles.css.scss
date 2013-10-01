@@ -44,7 +44,6 @@
   user-select: none;
   margin-top: 10px;
   width: 200 px;
-  margin-left: 200px;
   margin-right: auto;
   color:#643b0e;
   table, tr, td{
@@ -93,11 +92,6 @@
   
 }
 
-#puzzle {
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .puzzle_buttons
 {
   text-align:center;
@@ -142,6 +136,13 @@ select{
 
 .double_digits{
   color:red;
+}
+
+.row_column_finished{
+  color:white;
+}
+
+#handle{
 }
 
 
