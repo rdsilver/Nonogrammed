@@ -21,5 +21,5 @@
 
 
 $(function() {
-    $( "#draggable" ).draggable({ handle: "#handle" });
+    $( "#draggable" ).draggable({ handle: "#handle" , containment: [0,0,1200,1000] , cursor: "crosshair" });
   });

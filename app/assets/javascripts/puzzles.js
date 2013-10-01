@@ -23,12 +23,14 @@ function getCurrentBoard()
   return solution_string;
 }
 
-function check_solved_row_or_column(){
-  /*
+function check_solved_row_or_column(row_num , col_num){
+  
+  console.log(row_num);
   $('.puzzle_numbers_column').each(function (){
-      console.log($(this).children("b").text());
+      $(this).children("b").each(function(){
+      });
     });
-*/
+
 }
 
 function giveHint()
@@ -180,7 +182,9 @@ $(document).ready(function() {
 
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
-    check_solved_row_or_column();
+    row_num = $(this).attr('id').split("-")[2];
+    col_num = $(this).attr('id').split("-")[3];
+    check_solved_row_or_column(row_num,col_num);
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
       $(this).removeClass('black');
@@ -194,7 +198,9 @@ $(document).ready(function() {
 
   $('.puzzle_cell').bind("contextmenu", function(e) {
     e.preventDefault();
-    check_solved_row_or_column();
+    row_num = $(this).attr('id').split("-")[2];
+    col_num = $(this).attr('id').split("-")[3];
+    check_solved_row_or_column(row_num,col_num);
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode){
       $(this).removeClass('x');
@@ -242,6 +248,7 @@ $(document).ready(function() {
     $('.puzzle_cell').each(function (){
       $(this).removeClass('black');
       $(this).removeClass("x");
+      $('#solved_or_not').html("");
     });
     resetTimer();
   });  
