@@ -26,10 +26,37 @@ function getCurrentBoard()
 function check_solved_row_or_column(cell){
   row_num = $(cell).attr('id').split("-")[2];
   col_num = $(cell).attr('id').split("-")[3];
-  $('.puzzle_numbers_column').eq(row_num-1).find("b").each(function(){
-          console.log($(this).html());
-    });
 
+  //Check row for completition. 
+  var total_row = 0;
+  var total_row_on = 0;
+
+  var total_column=0;
+  var total_column_on=0;
+
+  //Checks rows
+  $('.puzzle_numbers_column').eq(row_num-1).find("b").each(function(){
+          total_row += parseInt($(this).html()); 
+    });
+  total_row_on = $('.puzzle_numbers_column').eq(row_num-1).closest("tr").children('td.puzzle_cell.black').length
+
+  if(total_row=== total_row_on)
+    $('.puzzle_numbers_column').eq(row_num-1).addClass("row_column_finished");
+  else
+    $('.puzzle_numbers_column').eq(row_num-1).removeClass("row_column_finished");
+
+  //Checks columns
+   $(".puzzle_numbers_row").children("td").eq(col_num).children('b').each(function(){
+    total_column += parseInt($(this).html());
+  });
+   for(var x=1;x<=puzzleHeight();x++)
+    if($(".black#puzzle-cell-"+x+"-"+col_num).length)
+      total_column_on ++;
+
+  if(total_column=== total_column_on)
+    $('.puzzle_numbers_row').children("td").eq(col_num).addClass("row_column_finished");
+  else
+    $('.puzzle_numbers_row').children("td").eq(col_num).removeClass("row_column_finished");
 }
 
 function giveHint()
@@ -180,7 +207,6 @@ $(document).ready(function() {
 
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
-    check_solved_row_or_column($(this));
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
       $(this).removeClass('black');
@@ -190,11 +216,11 @@ $(document).ready(function() {
       $(this).addClass('black');
     }
     mouse_down = true;
+    check_solved_row_or_column($(this));
   });
 
   $('.puzzle_cell').bind("contextmenu", function(e) {
     e.preventDefault();
-    check_solved_row_or_column($(this));
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode){
       $(this).removeClass('x');
@@ -202,6 +228,7 @@ $(document).ready(function() {
     }
     else $(this).addClass('x');
     mouse_down = true;
+    check_solved_row_or_column($(this));
   });
 
   $('.puzzle_cell').hover(function(e){
@@ -209,7 +236,6 @@ $(document).ready(function() {
     row_num = $(this).attr('id').split("-")[2];
     col_num = $(this).attr('id').split("-")[3];
     if(mouse_down){
-      check_solved_row_or_column($(this));
       if(deletion_mode){
         $(this).removeClass('black');
         $(this).removeClass('x');
@@ -221,6 +247,7 @@ $(document).ready(function() {
       else{
         $(this).addClass('x');
       }
+      check_solved_row_or_column($(this));
     }
   });
 
@@ -246,6 +273,12 @@ $(document).ready(function() {
       $(this).removeClass('black');
       $(this).removeClass("x");
       $('#solved_or_not').html("");
+    });
+    $(".puzzle_numbers_column").each(function(){
+      $(this).removeClass("row_column_finished");
+    });
+    $(".puzzle_numbers_row").children('td').each(function(){
+      $(this).removeClass("row_column_finished");
     });
     resetTimer();
   });  
