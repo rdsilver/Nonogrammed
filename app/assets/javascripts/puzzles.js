@@ -23,12 +23,11 @@ function getCurrentBoard()
   return solution_string;
 }
 
-function check_solved_row_or_column(row_num , col_num){
-  
-  console.log(row_num);
-  $('.puzzle_numbers_column').each(function (){
-      $(this).children("b").each(function(){
-      });
+function check_solved_row_or_column(cell){
+  row_num = $(cell).attr('id').split("-")[2];
+  col_num = $(cell).attr('id').split("-")[3];
+  $('.puzzle_numbers_column').eq(row_num-1).find("b").each(function(){
+          console.log($(this).html());
     });
 
 }
@@ -165,6 +164,7 @@ $(document).ready(function() {
 
 
 
+
   $("#puzzle_table").delegate('td.puzzle_cell','mouseover mouseout', function(e) {
     row_num = $(this).attr('id').split('-')[2] -1;
     col_num = $(this).attr('id').split('-')[3];
@@ -178,13 +178,9 @@ $(document).ready(function() {
     }
    });
 
-
-
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
-    row_num = $(this).attr('id').split("-")[2];
-    col_num = $(this).attr('id').split("-")[3];
-    check_solved_row_or_column(row_num,col_num);
+    check_solved_row_or_column($(this));
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
       $(this).removeClass('black');
@@ -198,9 +194,7 @@ $(document).ready(function() {
 
   $('.puzzle_cell').bind("contextmenu", function(e) {
     e.preventDefault();
-    row_num = $(this).attr('id').split("-")[2];
-    col_num = $(this).attr('id').split("-")[3];
-    check_solved_row_or_column(row_num,col_num);
+    check_solved_row_or_column($(this));
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode){
       $(this).removeClass('x');
@@ -212,7 +206,10 @@ $(document).ready(function() {
 
   $('.puzzle_cell').hover(function(e){
     e.preventDefault();
+    row_num = $(this).attr('id').split("-")[2];
+    col_num = $(this).attr('id').split("-")[3];
     if(mouse_down){
+      check_solved_row_or_column($(this));
       if(deletion_mode){
         $(this).removeClass('black');
         $(this).removeClass('x');
@@ -239,7 +236,7 @@ $(document).ready(function() {
     giveHint();
   });
 
-  $('body').on('mouseup', function(e){
+  $('html').on('mouseup', function(e){
     e.preventDefault();
     mouse_down = false;
   });
