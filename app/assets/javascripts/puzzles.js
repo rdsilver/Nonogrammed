@@ -28,17 +28,28 @@ function check_solved_row_or_column(cell){
   col_num = $(cell).attr('id').split("-")[3];
 
   //Check row for completition. 
-  var total_row = 0;
-  var total_row_on = 0;
+  var total_row = "";
+  var total_row_on = "";
 
-  var total_column=0;
-  var total_column_on=0;
+  var total_column="";
+  var total_column_on="";
 
   //Checks rows
   $('.puzzle_numbers_column').eq(row_num-1).find("b").each(function(){
-          total_row += parseInt($(this).html()); 
+          total_row += $(this).html(); 
     });
-  total_row_on = $('.puzzle_numbers_column').eq(row_num-1).closest("tr").children('td.puzzle_cell.black').length
+  var temp=0;
+  $('.puzzle_numbers_column').eq(row_num-1).closest("tr").children('td.puzzle_cell').each(function(){
+    if($(this).hasClass('black'))
+      temp++;
+    else if(temp>0)
+    {
+      total_row_on+=''+temp;
+      temp=0;
+    }
+  });
+    if(temp>0)
+    total_row_on+=''+temp;
 
   if(total_row=== total_row_on)
     $('.puzzle_numbers_column').eq(row_num-1).addClass("row_column_finished");
@@ -47,11 +58,22 @@ function check_solved_row_or_column(cell){
 
   //Checks columns
    $(".puzzle_numbers_row").children("td").eq(col_num).children('b').each(function(){
-    total_column += parseInt($(this).html());
+    total_column += $(this).html();
   });
+
+   temp=0;
    for(var x=1;x<=puzzleHeight();x++)
     if($(".black#puzzle-cell-"+x+"-"+col_num).length)
-      total_column_on ++;
+      temp ++;
+    else if(temp>0)
+    {
+      total_column_on+=temp;
+      temp=0;
+    }
+
+    if(temp>0)
+      total_column_on+=temp;
+
 
   if(total_column=== total_column_on)
     $('.puzzle_numbers_row').children("td").eq(col_num).addClass("row_column_finished");
