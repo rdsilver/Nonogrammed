@@ -146,22 +146,6 @@ function findCell(row, col){
   return $(targetString)
 }
 
-
-
-function toggleSelectedCellBlack(){
-  if (currentSelectedCell().hasClass('black')){
-    currentSelectedCell().removeClass('black');
-  }
-  else currentSelectedCell().addClass('black');
-}
-
-function toggleSelectedCellX(){
-  if (currentSelectedCell().hasClass('x')){
-    currentSelectedCell().removeClass('x');
-  }
-  else currentSelectedCell().addClass('x');
-}
-
 var time=0;
 function timer()
 {
