@@ -61,8 +61,11 @@ class PuzzlesController < ApplicationController
 
       if(puzzle.average_time.nil?)
         puzzle.update_attribute("average_time",params[:time_taken].to_i)
+        puts params[:time_taken]
+        puts "first"
       else
         average_time = (puzzle.average_time/puzzle.times_solved * (puzzle.times_solved-1)) + (params[:time_taken].to_i/puzzle.times_solved)
+        puts "else statement"
         puzzle.update_attribute("average_time",average_time)
       end
 
