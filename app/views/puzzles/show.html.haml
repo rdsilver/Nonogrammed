@@ -43,9 +43,15 @@
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
 
-//%div#stats
-// %h2 Stats 
-// = "Times Solved: #{@puzzle_times_solved}"
+%div#stats
+  %h2 Stats 
+  -if(@puzzle_times_solved > 0)
+    = "Times Solved: #{@puzzle_times_solved}"
+    %br
+    = "Average Time: #{@puzzle_average_time}"
+  -else
+    = "Never been solved! Be the first!"
+  -end
 
 
     
