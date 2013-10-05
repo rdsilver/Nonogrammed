@@ -11,7 +11,7 @@ class PuzzlesController < ApplicationController
     @puzzle_solution = puzzle.grid.solution
     @puzzle_number = puzzle.id
     @puzzle_times_solved = puzzle.times_solved
-    @puzzle_average_time = puzzle.average_time
+    @puzzle_average_time = (puzzle.average_time/60).floor.to_s + ":" + (puzzle.average_time%60).to_i.to_s rescue ""
 
 
     #Fill in number logic (will go into model method)
@@ -57,15 +57,13 @@ class PuzzlesController < ApplicationController
     solved_before = params[:solved_before] == "true"
 
     if(solved && !solved_before)
+      puts "hlllll"
+      puts "adsfadsf"
       puzzle.increment!(:times_solved, by =1)
-
       if(puzzle.average_time.nil?)
         puzzle.update_attribute("average_time",params[:time_taken].to_i)
-        puts params[:time_taken]
-        puts "first"
       else
         average_time = (puzzle.average_time/puzzle.times_solved * (puzzle.times_solved-1)) + (params[:time_taken].to_i/puzzle.times_solved)
-        puts "else statement"
         puzzle.update_attribute("average_time",average_time)
       end
 
@@ -73,6 +71,19 @@ class PuzzlesController < ApplicationController
 
     respond_to do |format|
       response = { :status => "ok", :message => "Success!", :html => solved}
+      format.json { render json: response }
+    end
+  end
+
+  def get_stats
+    puzzle = Puzzle.find(params[:id])
+    stats = Array.new
+
+    stats << puzzle.average_time
+    stats << puzzle.times_solved
+
+    respond_to do |format|
+      response = { :status => "ok", :message => "Success!", :html => stats}
       format.json { render json: response }
     end
   end

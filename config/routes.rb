@@ -8,6 +8,7 @@ Nonogrammed::Application.routes.draw do
     member do
       post :check_solution
       post :give_hint
+      post :get_stats
     end
   end
 

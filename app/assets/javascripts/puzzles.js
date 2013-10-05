@@ -129,9 +129,26 @@ function checkSolution(solved_before){
       {
       $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h1>");
       clearInterval(intervalId);
+      updateStats();
       solved_before=true;
       }
       else $('#solved_or_not').html("<h3 style='text-align:center; color:#e45846'>WRONG<h1>");
+    },
+    error: function(xhr, status, error) {
+       console.log(error);
+      }
+    });
+}
+
+function updateStats(){
+  $.ajax({ 
+    type:"POST",
+    url: "../puzzles/" + puzzle_number + "/get_stats",
+    dataType:"json",
+    success: function(data) {
+      stats = data.html
+      console.log(stats[0]);
+      console.log(stats[1]);
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -199,9 +216,6 @@ $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
   var solved_before=false;
-
-
-
 
   $("#puzzle_table").delegate('td.puzzle_cell','mouseover mouseout', function(e) {
     row_num = $(this).attr('id').split('-')[2] -1;
