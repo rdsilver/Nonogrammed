@@ -112,11 +112,12 @@ function giveHint()
   });
 }
 
-function checkSolution(solved_before){
+function checkSolution(){
   solution_string = getCurrentBoard();// Makes a solution string from all the cells
   puzzle_number = $('#puzzle_number').attr('value');
   temp_t = $('.timer').children('p').text().split(":");
   time_taken = parseInt(temp_t[0])*60 + parseInt(temp_t[1]);
+  solved_before = $('#check_solution').hasClass("solved");
   
 
   $.ajax({ //Checks to see if solution is correction
@@ -130,14 +131,14 @@ function checkSolution(solved_before){
       $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h1>");
       clearInterval(intervalId);
       updateStats();
-      solved_before=true;
+      $('#check_solution').addClass("solved");
       }
       else $('#solved_or_not').html("<h3 style='text-align:center; color:#e45846'>WRONG<h1>");
     },
     error: function(xhr, status, error) {
        console.log(error);
       }
-    });
+    });  
 }
 
 function updateStats(){
@@ -147,8 +148,8 @@ function updateStats(){
     dataType:"json",
     success: function(data) {
       stats = data.html
-      console.log(stats[0]);
-      console.log(stats[1]);
+       $('#times_solved').html("Times Solved: " + stats[1]);
+       $('#average_time').html("Average Time: " + stats[0]);
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -215,7 +216,6 @@ window.onload = function (){
 $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
-  var solved_before=false;
 
   $("#puzzle_table").delegate('td.puzzle_cell','mouseover mouseout', function(e) {
     row_num = $(this).attr('id').split('-')[2] -1;
@@ -281,12 +281,12 @@ $(document).ready(function() {
   });
 
   $('#check_solution').on('click', function(){
-    checkSolution(solved_before);
+    if(!$(this).hasClass("solved"))
+    checkSolution();
   });
 
   $('#hint_puzzle').on('click', function(){
     giveHint();
-    solved_before=true; //Prevents cheating
   });
 
   $('html').on('mouseup', function(e){
@@ -295,6 +295,7 @@ $(document).ready(function() {
   });
 
   $('#reset_puzzle').on('click',function(){  /*Resets all the cells to have neither the X or the Black Css Class*/
+    $('#check_solution').removeClass("solved");
     $('.puzzle_cell').each(function (){
       $(this).removeClass('black');
       $(this).removeClass("x");

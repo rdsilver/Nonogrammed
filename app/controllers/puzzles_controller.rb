@@ -57,8 +57,6 @@ class PuzzlesController < ApplicationController
     solved_before = params[:solved_before] == "true"
 
     if(solved && !solved_before)
-      puts "hlllll"
-      puts "adsfadsf"
       puzzle.increment!(:times_solved, by =1)
       if(puzzle.average_time.nil?)
         puzzle.update_attribute("average_time",params[:time_taken].to_i)

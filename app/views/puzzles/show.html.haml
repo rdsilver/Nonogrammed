@@ -46,11 +46,13 @@
 %div#stats
   %h2 Stats 
   -if(@puzzle_times_solved > 0)
-    = "Times Solved: #{@puzzle_times_solved}"
+    %p#times_solved Times Solved: #{@puzzle_times_solved}
     %br
-    = "Average Time: #{@puzzle_average_time}"
+    %p#average_time Average Time: #{@puzzle_average_time}
   -else
-    = "Never been solved! Be the first!"
+    %p#times_solved Times Solved: Never been solved!
+    %br
+    %p#average_time Average Time: Never been solved!
 
 
     
