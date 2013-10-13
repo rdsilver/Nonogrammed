@@ -87,7 +87,7 @@ function giveHint()
 
   solution_string = getCurrentBoard();
   puzzle_number = $('#puzzle_number').attr('value')
-
+  $('#check_solution').addClass("solved");
   $.ajax({
     type:"POST",
     url: "../puzzles/"+puzzle_number+"/give_hint?solution=" + solution_string,
