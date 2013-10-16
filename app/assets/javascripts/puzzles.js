@@ -104,7 +104,7 @@ function giveHint()
         $('td.puzzle_cell:eq('+index+')').addClass('x');
         $('td.puzzle_cell:eq('+index+')').removeClass('black');
       }
-
+      check_solved_row_or_column($('td.puzzle_cell:eq('+index+')'));
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -130,6 +130,7 @@ function checkSolution(){
       {
       $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h1>");
       clearInterval(intervalId);
+      if(!solved_before)
       updateStats();
       $('#check_solution').addClass("solved");
       }
@@ -281,7 +282,6 @@ $(document).ready(function() {
   });
 
   $('#check_solution').on('click', function(){
-    if(!$(this).hasClass("solved"))
     checkSolution();
   });
 
