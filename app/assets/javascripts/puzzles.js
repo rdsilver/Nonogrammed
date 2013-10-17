@@ -150,7 +150,7 @@ function updateStats(){
     success: function(data) {
       stats = data.html
        $('#times_solved').html("Times Solved: " + stats[1]);
-       $('#average_time').html("Average Time: " + stats[0]);
+       $('#average_time').html("Average Time: " + stats[0] + "s");
     },
     error: function(xhr, status, error) {
        console.log(error);

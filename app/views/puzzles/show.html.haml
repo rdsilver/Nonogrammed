@@ -17,17 +17,18 @@
       =submit_tag "Give Hint" , id: "hint_puzzle", class: "greybutton" 
       =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton" 
     %div#solved_or_not
-  %div#stats.small_margin_top
+    %hr
+  
   %h4.center Global Stats 
-  %br
-  -if(@puzzle_times_solved > 0)
-    %p#times_solved Times Solved: #{@puzzle_times_solved}
-    %br
-    %p#average_time Average Time: #{@puzzle_average_time} seconds!
-  -else
-    %p#times_solved Times Solved: 0
-    %br
-    %p#average_time Average Time: 0
+  %div#innerstats
+    -if(@puzzle_times_solved > 0)
+      %b#times_solved Times Solved: #{@puzzle_times_solved}
+      %br
+      %b#average_time Average Time: #{@puzzle_average_time} s
+    -else
+      %b#times_solved Times Solved: 0
+      %br
+      %b#average_time Average Time: 0 s
 
 %div#puzzle#draggable.ui-widget-content{:style => "width:800px; margin-left:190px;"}
   %div#handle
