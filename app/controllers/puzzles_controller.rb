@@ -11,7 +11,7 @@ class PuzzlesController < ApplicationController
     @puzzle_solution = puzzle.grid.solution
     @puzzle_number = puzzle.id
     @puzzle_times_solved = puzzle.times_solved
-    @puzzle_average_time = (puzzle.average_time/60).floor.to_s + ":" + (puzzle.average_time%60).to_i.to_s rescue ""
+    @puzzle_average_time = puzzle.average_time
 
 
     #Fill in number logic (will go into model method)
