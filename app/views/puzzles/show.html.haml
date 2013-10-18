@@ -16,7 +16,8 @@
       =submit_tag "Check Solution" , id: "check_solution", class: "greybutton"
       =submit_tag "Give Hint" , id: "hint_puzzle", class: "greybutton" 
       =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton" 
-    %div#solved_or_not
+    %div#solved_or_not 
+      %h3 Correct?
     %hr
   
   %h4.center Global Stats 
@@ -25,10 +26,14 @@
       %b#times_solved Times Solved: #{@puzzle_times_solved}
       %br
       %b#average_time Average Time: #{@puzzle_average_time} s
+      %br
+      %b#average_size_time Average 4 Size: #{@puzzle_size_average_time} s
     -else
       %b#times_solved Times Solved: 0
       %br
       %b#average_time Average Time: 0 s
+      %br
+      %b#average_size_time Average 4 Size: #{@puzzle_size_average_time} s
 
 %div#puzzle#draggable.ui-widget-content{:style => "width:800px; margin-left:190px;"}
   %div#handle

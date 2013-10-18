@@ -7,4 +7,10 @@ class Puzzle < ActiveRecord::Base
     self.times_solved ||= '0'
   end
 
+  def self.average_time_for_size(size_of_puzzle)
+  	numerator   = Grid.joins(:puzzle).where(width:size_of_puzzle).sum("average_time")
+  	denominator = Grid.joins(:puzzle).where(width:size_of_puzzle).where("times_solved > 0").count
+  	numerator/denominator
+  end
+
 end

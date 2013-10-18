@@ -128,13 +128,13 @@ function checkSolution(){
       var solved = data.html;
       if(solved)
       {
-      $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h1>");
+      $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h3>");
       clearInterval(intervalId);
       if(!solved_before)
       updateStats();
       $('#check_solution').addClass("solved");
       }
-      else $('#solved_or_not').html("<h3 style='text-align:center; color:#e45846'>WRONG<h1>");
+      else $('#solved_or_not').html("<h3 style='text-align:center; color:#e45846'>WRONG<h3>");
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -150,7 +150,8 @@ function updateStats(){
     success: function(data) {
       stats = data.html
        $('#times_solved').html("Times Solved: " + stats[1]);
-       $('#average_time').html("Average Time: " + stats[0] + "s");
+       $('#average_time').html("Average Time: " + stats[0] + " s");
+       $('#average_size_time').html("Average 4 Size: " + stats[2])
     },
     error: function(xhr, status, error) {
        console.log(error);

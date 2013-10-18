@@ -11,7 +11,8 @@ class PuzzlesController < ApplicationController
     @puzzle_solution = puzzle.grid.solution
     @puzzle_number = puzzle.id
     @puzzle_times_solved = puzzle.times_solved
-    @puzzle_average_time = puzzle.average_time
+    @puzzle_average_time = puzzle.average_time.round(2) rescue "0"
+    @puzzle_size_average_time = Puzzle.average_time_for_size(@puzzle_width).round(2) rescue "0"
 
 
     #Fill in number logic (will go into model method)
@@ -79,6 +80,7 @@ class PuzzlesController < ApplicationController
 
     stats << puzzle.average_time
     stats << puzzle.times_solved
+    stats << Puzzle.average_time_for_size(puzzle.grid.width).round(2)
 
     respond_to do |format|
       response = { :status => "ok", :message => "Success!", :html => stats}
