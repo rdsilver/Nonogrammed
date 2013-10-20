@@ -13,4 +13,5 @@ class Puzzle < ActiveRecord::Base
   	numerator/denominator
   end
 
+
 end

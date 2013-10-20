@@ -1,4 +1,3 @@
-
 function puzzleHeight(){
   return parseInt($('#puzzle_height').attr('value'));
 }
@@ -9,6 +8,50 @@ function puzzleWidth(){
 
 function pad (str, max) {
   return str.length < max ? pad("0" + str, max) : str;
+}
+
+function setNicerBorders(){
+  
+  puzzle_width = puzzleWidth();
+  switch(puzzle_width)
+  {
+  case 10:
+    $('table tr:not(.puzzle_numbers_row):nth-child(6)').each(function(){
+      $(this).addClass('bottom_border');
+    });
+    $('table td:nth-child(7)').each(function(){
+      $(this).addClass('left_border');
+    });
+    break;
+  case 15:
+    $('table tr:nth-child(5n + 1)').each(function(){
+      $(this).addClass('bottom_border');
+    });
+    $('table td:nth-child(5n + 2)').each(function(){
+      $(this).addClass('left_border');
+    });
+    break;
+  case 20:
+    $('table tr:nth-child(5n + 1)').each(function(){
+      $(this).addClass('bottom_border');
+    });
+    $('table td:nth-child(5n + 2)').each(function(){
+      $(this).addClass('left_border');
+    });
+    break;
+  default:
+    if(puzzle_width>10)
+    {
+    $('table tr:nth-child(5n + 1)').each(function(){
+      $(this).addClass('bottom_border');
+    });
+    $('table td:nth-child(5n + 2)').each(function(){
+      $(this).addClass('left_border');
+    });
+    }
+    break;
+  }
+  
 }
 
 function getCurrentBoard()
@@ -213,6 +256,7 @@ function resetTimer()
 
 window.onload = function (){
   intervalId = setInterval(timer,1000);
+  setNicerBorders();
 }
 
 $(document).ready(function() {

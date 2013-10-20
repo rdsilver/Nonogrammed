@@ -78,7 +78,7 @@ class PuzzlesController < ApplicationController
     puzzle = Puzzle.find(params[:id])
     stats = Array.new
 
-    stats << puzzle.average_time
+    stats << puzzle.average_time.round(2)
     stats << puzzle.times_solved
     stats << Puzzle.average_time_for_size(puzzle.grid.width).round(2)
 
