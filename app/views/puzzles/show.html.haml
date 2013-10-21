@@ -35,6 +35,11 @@
       %br
       %b#average_size_time Average 4 Size: #{@puzzle_size_average_time} s
 
+  %hr
+  %p.center 
+    =link_to "What's going on?" , "http://en.wikipedia.org/wiki/Nonogram" , :target => "_blank"
+
+
 %div#puzzle#draggable.ui-widget-content{:style => "width:800px; margin-left:190px;"}
   %div#handle
     =image_tag "Arrow1.png" 
