@@ -10,36 +10,10 @@ function pad (str, max) {
   return str.length < max ? pad("0" + str, max) : str;
 }
 
-function setNicerBorders(){
+function setNicerBorders(){ //Set Bolder borders for easier solving
   
   puzzle_width = puzzleWidth();
-  switch(puzzle_width)
-  {
-  case 10:
-    $('table tr:not(.puzzle_numbers_row):nth-child(6)').each(function(){
-      $(this).addClass('bottom_border');
-    });
-    $('table td:nth-child(7)').each(function(){
-      $(this).addClass('left_border');
-    });
-    break;
-  case 15:
-    $('table tr:nth-child(5n + 1)').each(function(){
-      $(this).addClass('bottom_border');
-    });
-    $('table td:nth-child(5n + 2)').each(function(){
-      $(this).addClass('left_border');
-    });
-    break;
-  case 20:
-    $('table tr:nth-child(5n + 1)').each(function(){
-      $(this).addClass('bottom_border');
-    });
-    $('table td:nth-child(5n + 2)').each(function(){
-      $(this).addClass('left_border');
-    });
-    break;
-  default:
+    
     if(puzzle_width>10)
     {
     $('table tr:nth-child(5n + 1)').each(function(){
@@ -48,13 +22,10 @@ function setNicerBorders(){
     $('table td:nth-child(5n + 2)').each(function(){
       $(this).addClass('left_border');
     });
-    }
-    break;
-  }
-  
+    } 
 }
 
-function getCurrentBoard()
+function getCurrentBoard() //Returns the current board solution string
 {
   solution_string = "";
     $('.puzzle_cell').each(function(){
@@ -125,7 +96,7 @@ function check_solved_row_or_column(cell){
     $('.puzzle_numbers_row').children("td").eq(col_num).removeClass("row_column_finished");
 }
 
-function giveHint()
+function giveHint() //Ajax to get a hint (needs to be faster)
 {
 
   solution_string = getCurrentBoard();
@@ -185,7 +156,7 @@ function checkSolution(){
     });  
 }
 
-function updateStats(){
+function updateStats(){ // Updates the stats on the left side
   $.ajax({ 
     type:"POST",
     url: "../puzzles/" + puzzle_number + "/get_stats",
@@ -232,7 +203,7 @@ function findCell(row, col){
   targetString += row;
   targetString += '-';
   targetString += col;
-  return $(targetString)
+  return $(targetString);
 }
 
 var time=0;
@@ -254,7 +225,7 @@ function resetTimer()
   intervalId = setInterval(timer,1000);
 }
 
-window.onload = function (){
+window.onload = function (){ // Gets the timer going and sets better borders
   intervalId = setInterval(timer,1000);
   setNicerBorders();
 }
@@ -277,6 +248,7 @@ $(document).ready(function() {
    });
 
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
+    console.log("mouse down 1");
     e.preventDefault();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
@@ -290,7 +262,8 @@ $(document).ready(function() {
     check_solved_row_or_column($(this));
   });
 
-  $('.puzzle_cell').bind("contextmenu", function(e) {
+  $('.puzzle_cell').bind("contextmenu", function(e) { //Right Clicking
+    console.log("mouse down 2");
     e.preventDefault();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode){
@@ -301,8 +274,8 @@ $(document).ready(function() {
     mouse_down = true;
     check_solved_row_or_column($(this));
   });
-
-  $('.puzzle_cell').hover(function(e){
+ 
+  $('.puzzle_cell').hover(function(e){ //For smooth adding of xs and blocks
     e.preventDefault();
     row_num = $(this).attr('id').split("-")[2];
     col_num = $(this).attr('id').split("-")[3];
@@ -337,6 +310,7 @@ $(document).ready(function() {
   $('html').on('mouseup', function(e){
     e.preventDefault();
     mouse_down = false;
+    console.log("mouse up");
   });
 
   $('#reset_puzzle').on('click',function(){  /*Resets all the cells to have neither the X or the Black Css Class*/
