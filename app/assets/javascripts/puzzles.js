@@ -257,12 +257,12 @@ $(document).ready(function() {
     else if(e.which==1){
       $(this).addClass('black');
     }
-    else if(deletion_mode && e.which==2)
+    else if(deletion_mode && e.which==3)
     {
       $(this).removeClass('black');
       $(this).removeClass('x');
     }
-    else if(e.which==2)
+    else if(e.which==3)
     {
       $(this).addClass('x');
     }
@@ -270,7 +270,7 @@ $(document).ready(function() {
     check_solved_row_or_column($(this));
   });
 
-  $('.puzzle_cell').bind("contextmenu", function(e) { //Right Clicking Disabling menu
+  $('html').bind("contextmenu", function(e) { //Right Clicking Disabling menu
     e.preventDefault();
   });
 
