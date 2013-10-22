@@ -248,7 +248,6 @@ $(document).ready(function() {
    });
 
   $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
-    console.log("mouse down 1");
     e.preventDefault();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
@@ -258,21 +257,26 @@ $(document).ready(function() {
     else if(e.which==1){
       $(this).addClass('black');
     }
+    else if(deletion_mode && e.which==2)
+    {
+      $(this).removeClass('black');
+      $(this).removeClass('x');
+    }
+    else if(e.which==2)
+    {
+      $(this).addClass('x');
+    }
     mouse_down = true;
     check_solved_row_or_column($(this));
   });
 
-  $('.puzzle_cell').bind("contextmenu", function(e) { //Right Clicking
-    console.log("mouse down 2");
+  $('.puzzle_cell').bind("contextmenu", function(e) { //Right Clicking Disabling menu
     e.preventDefault();
-    deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
-    if(deletion_mode){
-      $(this).removeClass('x');
-      $(this).removeClass('black');
-    }
-    else $(this).addClass('x');
-    mouse_down = true;
-    check_solved_row_or_column($(this));
+  });
+
+  $('html').on('mouseup', function(e){
+    e.preventDefault();
+    mouse_down = false;
   });
  
   $('.puzzle_cell').hover(function(e){ //For smooth adding of xs and blocks
@@ -305,12 +309,6 @@ $(document).ready(function() {
 
   $('#hint_puzzle').on('click', function(){
     giveHint();
-  });
-
-  $('html').on('mouseup', function(e){
-    e.preventDefault();
-    mouse_down = false;
-    console.log("mouse up");
   });
 
   $('#reset_puzzle').on('click',function(){  /*Resets all the cells to have neither the X or the Black Css Class*/
