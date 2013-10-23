@@ -5,6 +5,7 @@ gem 'rails', '3.2.11'
 group :development, :test do 
   gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
+  gem 'better_errors'
 end
 
 
