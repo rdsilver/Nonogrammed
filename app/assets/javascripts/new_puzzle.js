@@ -13,6 +13,12 @@ $('#size_of_new_puzzle').on('change', function(){ //If they change the size, we 
     	}
     }
 
+    //Clears Name Variable
+    $('#name_of_puzzle').val("")
+
+    //Updates number of puzzle per size
+    $('#count_handler').html($('#count_for_sizes').attr('value-'+new_size)+ ' custom puzzles of this size so far, make more!');
+
  });
 
 $('#create_new_puzzle').on('click', function(){

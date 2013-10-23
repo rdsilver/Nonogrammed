@@ -5,7 +5,7 @@ class DashboardController < ApplicationController
   	if params[:size].nil?
   	 rand_puzzle_id = Puzzle.all.sample.id
   	else 
-     rand_puzzle_id = Grid.joins(:puzzle).where('width =?', params[:size]).where('name is NOT null').sample.puzzle_id rescue nil
+     rand_puzzle_id = Grid.joins(:puzzle).where('width =?', params[:size]).where(approved:true).sample.puzzle_id rescue nil
     end
 
     if rand_puzzle_id.nil?

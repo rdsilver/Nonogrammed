@@ -112,7 +112,11 @@ class PuzzlesController < ApplicationController
   end
 
   def new_puzzle #New puzzle page
-
+    @count_for_sizes = Hash.new
+    @puzzle_width = 5
+    (5..20).each do |p|
+      @count_for_sizes[p] = Grid.joins(:puzzle).where(width:p).where(puzzles:  {approved:true}).count
+    end
   end
 
   def create_new_puzzle #Tries to create a new puzzle, approval set to false
