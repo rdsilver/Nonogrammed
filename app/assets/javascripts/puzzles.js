@@ -145,10 +145,13 @@ function checkSolution(){
       $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h3>");
       clearInterval(intervalId);
       if(!solved_before)
+      {
       updateStats();
+      $('#draggable').append('<h2 style=color:DeepSkyBlue >' + $("#puzzle_name").attr('value') + '</h2>');
+      }
       $('#check_solution').addClass("solved");
       }
-      else $('#solved_or_not').html("<h3 style='text-align:center; color:#e45846'>WRONG<h3>");
+      else $('#solved_or_not').html("<h3 class=center style='text-align:center; color:#e45846'>WRONG<h3>");
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -234,7 +237,7 @@ $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
 
-  $("#puzzle_table").delegate('td.puzzle_cell','mouseover mouseout', function(e) {
+  $("#puzzle_table:not(.new_puzzle_table)").delegate('td.puzzle_cell','mouseover mouseout', function(e) {
     row_num = $(this).attr('id').split('-')[2] -1;
     col_num = $(this).attr('id').split('-')[3];
    if (e.type == 'mouseover') {
@@ -247,7 +250,7 @@ $(document).ready(function() {
     }
    });
 
-  $('.puzzle_cell').on('mousedown',function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
+  $('#puzzle_table').on('mousedown','.puzzle_cell', function(e){ /*Mousedown will make a square black if it is empty, otherwise make it empty*/
     e.preventDefault();
     deletion_mode = $(this).hasClass('black') || $(this).hasClass('x');
     if(deletion_mode && e.which==1){
@@ -267,7 +270,9 @@ $(document).ready(function() {
       $(this).addClass('x');
     }
     mouse_down = true;
-    check_solved_row_or_column($(this));
+
+    if($("#puzzle_table:not(.new_puzzle_table)").length >0) //So new puzzle table doesn't throw hundreds of errors
+      check_solved_row_or_column($(this));
   });
 
   $('html').bind("contextmenu", function(e) { //Right Clicking Disabling menu
@@ -279,10 +284,8 @@ $(document).ready(function() {
     mouse_down = false;
   });
  
-  $('.puzzle_cell').hover(function(e){ //For smooth adding of xs and blocks
+  $('#puzzle_table').on('mouseenter','.puzzle_cell', function(e){ //For smooth adding of xs and blocks
     e.preventDefault();
-    row_num = $(this).attr('id').split("-")[2];
-    col_num = $(this).attr('id').split("-")[3];
     if(mouse_down){
       if(deletion_mode){
         $(this).removeClass('black');
@@ -295,7 +298,10 @@ $(document).ready(function() {
       else{
         $(this).addClass('x');
       }
+
+      if($("#puzzle_table:not(.new_puzzle_table)").length >0)  //So new puzzle table doesn't throw hundreds of errors
       check_solved_row_or_column($(this));
+
     }
   });
 

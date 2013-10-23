@@ -1,6 +1,7 @@
 .hidden{id: "puzzle_height", value: @puzzle_height}
 .hidden{id: "puzzle_width", value: @puzzle_width}
 .hidden{id: "puzzle_number", value: @puzzle_number}
+.hidden{id: "puzzle_name",value:@puzzle_name}
 
 %div#sidebar
   %div#logo.center
@@ -38,6 +39,8 @@
   %hr
   %p.center 
     =link_to "What's going on?" , "http://en.wikipedia.org/wiki/Nonogram" , :target => "_blank"
+  %p.center
+    =link_to "Create New Puzzles", :action => "new_puzzle"
 
 
 %div#puzzle#draggable.ui-widget-content{:style => "width:800px; margin-left:190px;"}
@@ -65,7 +68,7 @@
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
 
-          
+
 
 
 

@@ -3,7 +3,7 @@ class PuzzlesController < ApplicationController
   # GET /puzzles/1.json
   def show
     puzzle = Puzzle.find(params[:id])
-    @puzzle_name = puzzle.id.to_s
+    @puzzle_name = puzzle.name
     @puzzle_difficulty = puzzle.difficulty.to_s
     @puzzle_points = puzzle.points.to_s
     @puzzle_height = puzzle.grid.height
@@ -109,6 +109,28 @@ class PuzzlesController < ApplicationController
       response = { :status => "ok", :message => "Success!", :html => hint}
       format.json { render json: response }
     end
+  end
+
+  def new_puzzle #New puzzle page
+
+  end
+
+  def create_new_puzzle #Tries to create a new puzzle, approval set to false
+   solution = params[:solution]
+   name = params[:name]
+   size = Math.sqrt(solution.length).to_i
+
+   if((solution.count '0').to_i != size*size) 
+     p = Puzzle.create(difficulty: size , points: size, times_solved: 0, approved:false, name: name)
+     g= Grid.create(height: size, width: size, solution: solution, puzzle_id: p.id)
+     p.update_attributes(grid_id: g.id)
+   end
+
+   respond_to do |format|
+      response = { :status => "ok", :message => "Success!", :html => "Success"}
+      format.json { render json: response }
+    end
+
   end
 
 

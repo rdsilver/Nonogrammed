@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131004151730) do
+ActiveRecord::Schema.define(:version => 20131022220708) do
 
   create_table "grids", :force => true do |t|
     t.integer  "height"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(:version => 20131004151730) do
     t.datetime "updated_at",   :null => false
     t.integer  "times_solved"
     t.float    "average_time"
+    t.string   "name"
+    t.boolean  "approved"
   end
 
   create_table "users", :force => true do |t|

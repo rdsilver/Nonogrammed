@@ -10,6 +10,10 @@ Nonogrammed::Application.routes.draw do
       post :give_hint
       post :get_stats
     end
+    collection do
+      get  :new_puzzle
+      post :create_new_puzzle
+    end
   end
 
   resources :users

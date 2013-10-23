@@ -1,0 +1,20 @@
+%h1 Make a new Puzzle! (Currently in Beta)
+%hr
+%div.small_margin_left
+	%h3 Size
+	= select_tag 'size_of_new_puzzle', options_for_select((5..20).to_a.map{|s| ["#{s}X#{s}", s]}, @puzzle_width) , class: 'inline'
+	%h3 Name
+	= text_field_tag 'name_of_puzzle'
+	%div#new_puzzle_div
+		%table#puzzle_table.new_puzzle_table.one-edge-shadow
+			-5.times do 
+				%tr
+					-5.times do
+						%td.puzzle_cell
+	%br
+	=submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton" 
+	%br
+	%h3 Submit for Approval!
+	= submit_tag 'Submit' , class: 'yellowbutton' , id: 'create_new_puzzle'
+
+
