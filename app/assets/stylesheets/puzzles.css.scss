@@ -45,7 +45,9 @@
   margin-top: 10px;
   width: 200 px;
   margin-right: auto;
+  margin-left:auto;
   color:#643b0e;
+  margin-top:10%;
   table, tr, td{
     border: 1px solid black;
   }
@@ -125,7 +127,8 @@ select{
 }
 
 .double_digits{
-  color:red;
+  text-decoration:underline;
+  margin-bottom:1px;
 }
 
 .row_column_finished{
@@ -149,6 +152,11 @@ select{
 {
   width:10px;
   height:10px;
+}
+
+#move_left_div
+{
+  margin-left:180px;
 }
 
 

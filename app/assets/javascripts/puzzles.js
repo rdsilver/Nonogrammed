@@ -147,7 +147,7 @@ function checkSolution(){
       if(!solved_before)
       {
       updateStats();
-      $('#draggable').append('<h2 style=color:DeepSkyBlue >' + $("#puzzle_name").attr('value') + '</h2>');
+      $('#puzzle_table').append('<h2 style=color:DeepSkyBlue >' + $("#puzzle_name").attr('value') + '</h2>');
       }
       $('#check_solution').addClass("solved");
       }
