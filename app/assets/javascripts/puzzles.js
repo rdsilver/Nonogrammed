@@ -14,7 +14,7 @@ function setNicerBorders(){ //Set Bolder borders for easier solving
   
   puzzle_width = puzzleWidth();
     
-    if(puzzle_width>10)
+    if(puzzle_width>=10)
     {
     $('table tr:nth-child(5n + 1)').each(function(){
       $(this).addClass('bottom_border');
@@ -22,7 +22,7 @@ function setNicerBorders(){ //Set Bolder borders for easier solving
     $('table td:nth-child(5n + 2)').each(function(){
       $(this).addClass('left_border');
     });
-    } 
+    }
 }
 
 function getCurrentBoard() //Returns the current board solution string
@@ -51,11 +51,14 @@ function check_solved_row_or_column(cell){
 
   //Checks rows
   $('.puzzle_numbers_column').eq(row_num-1).find("b").each(function(){
-          total_row += $(this).html(); 
+          total_row += $(this).html();
     });
   var temp=0;
   $('.puzzle_numbers_column').eq(row_num-1).closest("tr").children('td.puzzle_cell').each(function(){
-    if($(this).hasClass('black'))
+
+    
+
+    if($(this).hasClass('black')) //If black
       temp++;
     else if(temp>0)
     {
@@ -94,13 +97,31 @@ function check_solved_row_or_column(cell){
     $('.puzzle_numbers_row').children("td").eq(col_num).addClass("row_column_finished");
   else
     $('.puzzle_numbers_row').children("td").eq(col_num).removeClass("row_column_finished");
+
+  checkAllGreen();
+
+
+}
+
+function checkAllGreen()
+{
+  allGreen = true; //You only have to check half the numbers!
+  $(".puzzle_numbers_row").children("td").children('b').parent().each(function(){
+    if(!$(this).hasClass("row_column_finished"))
+      {
+        allGreen=false;
+        return false;
+      }
+  });
+  if(allGreen)
+    checkSolution();
 }
 
 function giveHint() //Ajax to get a hint (needs to be faster)
 {
 
   solution_string = getCurrentBoard();
-  puzzle_number = $('#puzzle_number').attr('value')
+  puzzle_number = $('#puzzle_number').attr('value');
   $('#check_solution').addClass("solved");
   $.ajax({
     type:"POST",
@@ -142,16 +163,18 @@ function checkSolution(){
       var solved = data.html;
       if(solved)
       {
-      $('#solved_or_not').html("<h3 style='text-align:center; color:#7a9a0b'>SOLVED<h3>");
       clearInterval(intervalId);
       if(!solved_before)
       {
       updateStats();
-      $('#puzzle_table').append('<h2 style=color:DeepSkyBlue >' + $("#puzzle_name").attr('value') + '</h2>');
+        if(!$('#correct_puzzle_name').hasClass("named"))
+        {
+        $('#correct_puzzle_name').append('<h2 style=color:DeepSkyBlue >' + $("#puzzle_name").attr('value') + '</h2>');
+        $('#correct_puzzle_name').addClass('named');
+        }
       }
       $('#check_solution').addClass("solved");
       }
-      else $('#solved_or_not').html("<h3 class=center style='text-align:center; color:#e45846'>WRONG<h3>");
     },
     error: function(xhr, status, error) {
        console.log(error);
@@ -322,7 +345,6 @@ $(document).ready(function() {
     $('.puzzle_cell').each(function (){
       $(this).removeClass('black');
       $(this).removeClass("x");
-      $('#solved_or_not').html("");
     });
     $(".puzzle_numbers_column").each(function(){
       $(this).removeClass("row_column_finished");

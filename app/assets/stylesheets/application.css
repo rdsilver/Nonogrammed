@@ -363,3 +363,7 @@ body{
   color:steelblue;
 }
 
+*:focus {
+    outline: 0;
+}
+

@@ -9,16 +9,13 @@
   %nav.navbuttons
     %div.upper
       = form_tag ({controller:'dashboard' , action: 'show'}) do
-        = submit_tag 'New Puzzle' , class: 'yellowbutton inline'
         = select_tag 'size', options_for_select((5..20).to_a.map{|s| ["#{s}X#{s}", s]}, @puzzle_width) , class: 'inline'
+        = submit_tag 'New Puzzle' , class: 'yellowbutton inline'
     %div.timer.center
       %p.bold 00:00
     %div.morebuttons
-      =submit_tag "Check Solution" , id: "check_solution", class: "greybutton"
       =submit_tag "Give Hint" , id: "hint_puzzle", class: "greybutton" 
       =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton" 
-    %div#solved_or_not 
-      %h3 Correct?
     %hr
   
   %h4.center Global Stats 
@@ -36,7 +33,7 @@
       %br
       %b#average_size_time Average 4 Size: #{@puzzle_size_average_time} s
 
-  %hr
+  %hr#check_solution
   %p.center 
     =link_to "What's going on?" , "http://en.wikipedia.org/wiki/Nonogram" , :target => "_blank"
   %p.center
@@ -50,10 +47,8 @@
         %td
           -@string_for_column[n].split(" ").each do |i|
             .seperate_numbers
-            -if i.length==1
-              %b=i
-            -else
-              %b.double_digits=i
+            %b=i
+            
     - (0...@puzzle_height).each do |h|
       %tr
         %td.puzzle_numbers_column
@@ -64,6 +59,7 @@
               %b.double_digits=i
         - (0...@puzzle_width).each do |w|
           %td.puzzle_cell{id: "puzzle-cell-#{h+1}-#{w+1}"}
+%div#correct_puzzle_name.center
 
 
 

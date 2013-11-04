@@ -10,7 +10,7 @@ $('#size_of_new_puzzle').on('change', function(){ //If they change the size, we 
     	for( var y=0;y<new_size;y++)
     	{
     	$tr.append($("<td class=puzzle_cell>"));
-    	}
+	}
     }
 
     //Clears Name Variable
