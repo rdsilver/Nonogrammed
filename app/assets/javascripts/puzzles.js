@@ -98,23 +98,10 @@ function check_solved_row_or_column(cell){
   else
     $('.puzzle_numbers_row').children("td").eq(col_num).removeClass("row_column_finished");
 
-  checkAllGreen();
 
+  if($(".puzzle_numbers_row").children("td").not('.row_column_finished').length == 1) //If all columns are green check solution
+  checkSolution();
 
-}
-
-function checkAllGreen()
-{
-  allGreen = true; //You only have to check half the numbers!
-  $(".puzzle_numbers_row").children("td").children('b').parent().each(function(){
-    if(!$(this).hasClass("row_column_finished"))
-      {
-        allGreen=false;
-        return false;
-      }
-  });
-  if(allGreen)
-    checkSolution();
 }
 
 function giveHint() //Ajax to get a hint (needs to be faster)
