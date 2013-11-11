@@ -295,17 +295,16 @@ $(document).ready(function() {
   $('#puzzle_table').on('mouseenter','.puzzle_cell', function(e){ //For smooth adding of xs and blocks
     e.preventDefault();
 
-    var charCode = e.which || e.keyCode;
-
     if(mouse_down){
+      var charCode = e.which || e.keyCode;
+      console.log(e.keyCode);
+
       if(deletion_mode){
         $(this).removeClass('black');
         $(this).removeClass('x');
       }
       else if(e.which==1){
         console.log("hover left");
-            console.log(e.which);
-            console.log(e.keyCode);
 
         $(this).addClass('black');
         $(this).removeClass('x');
