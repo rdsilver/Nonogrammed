@@ -301,6 +301,8 @@ $(document).ready(function() {
       }
       else if(e.which==1){
         console.log("hover left");
+            console.log(e.which);
+
         $(this).addClass('black');
         $(this).removeClass('x');
       } 
