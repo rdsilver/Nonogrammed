@@ -106,10 +106,9 @@ function check_solved_row_or_column(cell){
 
 function giveHint() //Ajax to get a hint (needs to be faster)
 {
-
   solution_string = getCurrentBoard();
   puzzle_number = $('#puzzle_number').attr('value');
-  $('#check_solution').addClass("solved");
+  time += 30;
   $.ajax({
     type:"POST",
     url: "../puzzles/"+puzzle_number+"/give_hint?solution=" + solution_string,
@@ -140,7 +139,6 @@ function checkSolution(){
   temp_t = $('.timer').children('p').text().split(":");
   time_taken = parseInt(temp_t[0])*60 + parseInt(temp_t[1]);
   solved_before = $('#check_solution').hasClass("solved");
-  
 
   $.ajax({ //Checks to see if solution is correction
     type:"POST",
@@ -247,7 +245,7 @@ $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
 
-  $("#puzzle_table:not(.new_puzzle_table)").delegate('td.puzzle_cell','mouseover mouseout', function(e) {
+  $("#puzzle_table:not(.new_puzzle_table)").delegate('td.puzzle_cell','mouseover mouseout', function(e) { //Cool table highlighting on row and column
     row_num = $(this).attr('id').split('-')[2] -1;
     col_num = $(this).attr('id').split('-')[3];
    if (e.type == 'mouseover') {
@@ -302,10 +300,12 @@ $(document).ready(function() {
         $(this).removeClass('x');
       }
       else if(e.which==1){
+        console.log("hover left");
         $(this).addClass('black');
         $(this).removeClass('x');
       } 
       else{
+        console.log("hover right");
         $(this).addClass('x');
       }
 

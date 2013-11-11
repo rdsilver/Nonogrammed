@@ -1,5 +1,5 @@
 class Puzzle < ActiveRecord::Base
-  has_one :grid
+  has_one :grid, dependent: :destroy
   attr_accessible :difficulty, :grid_id, :points, :grid_id, :times_solved, :approved, :name
   before_save :default_values
   
