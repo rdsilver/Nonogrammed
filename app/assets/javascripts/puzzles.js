@@ -244,6 +244,7 @@ window.onload = function (){ // Gets the timer going and sets better borders
 $(document).ready(function() {
   var deletion_mode = false;
   var mouse_down = false;
+  var right_click_for_ie=false;
 
   $("#puzzle_table:not(.new_puzzle_table)").delegate('td.puzzle_cell','mouseover mouseout', function(e) { //Cool table highlighting on row and column
     row_num = $(this).attr('id').split('-')[2] -1;
@@ -267,6 +268,7 @@ $(document).ready(function() {
     }
     else if(e.which==1){
       $(this).addClass('black');
+      right_click_for_ie=false;
     }
     else if(deletion_mode && e.which==3)
     {
@@ -276,6 +278,7 @@ $(document).ready(function() {
     else if(e.which==3)
     {
       $(this).addClass('x');
+      right_click_for_ie=true;
     }
     mouse_down = true;
 
@@ -294,23 +297,18 @@ $(document).ready(function() {
  
   $('#puzzle_table').on('mouseenter','.puzzle_cell', function(e){ //For smooth adding of xs and blocks
     e.preventDefault();
-
+    console.log(right_click_for_ie);
     if(mouse_down){
-      var charCode = e.which || e.keyCode;
-      console.log(e.keyCode);
 
       if(deletion_mode){
         $(this).removeClass('black');
         $(this).removeClass('x');
       }
-      else if(e.which==1){
-        console.log("hover left");
-
+      else if(e.which==1 && !right_click_for_ie){
         $(this).addClass('black');
         $(this).removeClass('x');
       } 
       else{
-        console.log("hover right");
         $(this).addClass('x');
       }
 
