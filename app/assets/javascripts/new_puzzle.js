@@ -2,7 +2,7 @@ $(document).ready(function() {
 $('#size_of_new_puzzle').on('change', function(){ //If they change the size, we need to make the table that size
     new_size = $(this).val();
     $(".new_puzzle_area").width(400+new_size*3);
-    $(".new_puzzle_area").height(350+(new_size-5)*23);
+    $(".new_puzzle_area").height(400+(new_size-5)*23);
 
     $("#puzzle_table").html("");
     for( var x =0; x<new_size;x++)
