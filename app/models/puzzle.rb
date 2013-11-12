@@ -25,8 +25,45 @@ class Puzzle < ActiveRecord::Base
     end
   end
 
+  def get_string_for_row
+    string_for_row = Hash.new("")
+    puzzle_solution = self.grid.solution.split('').each_slice(self.grid.width).map(&:join)
+    puzzle_solution.each_with_index { |string , index|
+     ones_array = string.split("0")
+     ones_array.each do |x|
+       if(x.length>0)
+       string_for_row[index] += x.length.to_s + " "
+       end
+     end
+    }
+
+    return string_for_row
+  end
+
+  def get_string_for_column 
+    string_for_column = Hash.new("")
+    puzzle_solution = Array.new 
+    self.grid.solution.split('').each_slice(self.grid.width).map(&:join).each { |x|
+      puzzle_solution << x.to_s.scan(/.{1,1}/).join(',').split(',')
+    }
+    puzzle_solution = puzzle_solution.transpose
+    puzzle_solution = puzzle_solution.flatten
+    puzzle_solution = puzzle_solution.join('')
+    puzzle_solution = puzzle_solution.split('').each_slice(self.grid.height).map(&:join)
+    puzzle_solution.each_with_index { |string , index|
+     ones_array = string.split("0")
+     ones_array.each do |x|
+       if(x.length>0)
+       string_for_column[index] += x.length.to_s + " "
+       end
+     end
+    }
+
+    return string_for_column
+  end
+
   def self.approve_list
-    Puzzle.where(approved: false).each do |p|
+    Puzzle.where(approved: false).select{|p| p.is_logically_solvable}.each do |p|
       puts p.name
       p.quick_display
       yes = gets
@@ -38,6 +75,13 @@ class Puzzle < ActiveRecord::Base
       end
 
     end
+  end
+
+  def is_logically_solvable
+     string_for_column = self.get_string_for_column
+     string_for_row = self.get_string_for_row
+
+     return true
   end
 
 

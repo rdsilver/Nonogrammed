@@ -14,37 +14,8 @@ class PuzzlesController < ApplicationController
     @puzzle_average_time = puzzle.average_time.round(2) rescue "0"
     @puzzle_size_average_time = Puzzle.average_time_for_size(@puzzle_width).round(2) rescue "0"
 
-
-    #Fill in number logic (will go into model method)
-    @string_for_row = Hash.new("")
-    @string_for_column = Hash.new("")
-    @puzzle_solution = @puzzle_solution.split('').each_slice(@puzzle_width).map(&:join)
-    puts @puzzle_solution
-    @puzzle_solution.each_with_index { |string , index|
-     ones_array = string.split("0")
-     ones_array.each do |x|
-       if(x.length>0)
-       @string_for_row[index] += x.length.to_s + " "
-       end
-     end
-    }
-
-    @puzzle_solution = Array.new 
-    puzzle.grid.solution.split('').each_slice(@puzzle_width).map(&:join).each { |x|
-      @puzzle_solution << x.to_s.scan(/.{1,1}/).join(',').split(',')
-    }
-    @puzzle_solution = @puzzle_solution.transpose
-    @puzzle_solution = @puzzle_solution.flatten
-    @puzzle_solution = @puzzle_solution.join('')
-    @puzzle_solution = @puzzle_solution.split('').each_slice(@puzzle_height).map(&:join)
-    @puzzle_solution.each_with_index { |string , index|
-     ones_array = string.split("0")
-     ones_array.each do |x|
-       if(x.length>0)
-       @string_for_column[index] += x.length.to_s + " "
-       end
-     end
-    }
+    @string_for_row = puzzle.get_string_for_row
+    @string_for_column = puzzle.get_string_for_column 
 
     respond_to do |format|
       format.html # show.html.erb
