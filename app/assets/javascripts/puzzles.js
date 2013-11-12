@@ -154,7 +154,7 @@ function checkSolution(){
       updateStats();
         if(!$('#correct_puzzle_name').hasClass("named"))
         {
-        $('#correct_puzzle_name').append('<h2 style=color:DeepSkyBlue >' + $("#puzzle_name").attr('value') + '</h2>');
+        $('#correct_puzzle_name').append('<h2 style=color:#333 >' + $("#puzzle_name").attr('value') + '</h2>');
         $('#correct_puzzle_name').addClass('named');
         }
       }

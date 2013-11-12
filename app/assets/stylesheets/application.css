@@ -359,8 +359,12 @@ body{
 }
 
 #innerstats{
-  padding-left:5px;
-  color:steelblue;
+  padding-left:20px;
+  color:#444;
+}
+
+#create_new_puzzle_button{
+  width:50px !important;
 }
 
 *:focus {
