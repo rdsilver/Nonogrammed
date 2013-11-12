@@ -363,10 +363,6 @@ body{
   color:#444;
 }
 
-#create_new_puzzle_button{
-  width:50px !important;
-}
-
 *:focus {
     outline: 0;
 }

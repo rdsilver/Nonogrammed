@@ -297,7 +297,6 @@ $(document).ready(function() {
  
   $('#puzzle_table').on('mouseenter','.puzzle_cell', function(e){ //For smooth adding of xs and blocks
     e.preventDefault();
-    console.log(right_click_for_ie);
     if(mouse_down){
 
       if(deletion_mode){

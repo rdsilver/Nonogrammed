@@ -32,7 +32,7 @@ $.ajax({
     dataType:"json",
     success: function(data) {
       console.log("success");
-      $('div.small_margin_left').prepend("<h3 class=submitted_success style='color:green'>Submitted!</h3>");
+      $('.submitted_message').append("<b class=submitted_success style='color:green'>Submitted!</b>");
       $('.submitted_success').delay(1000).fadeOut();
     },
     error: function(xhr, status, error) {
