@@ -1,23 +1,27 @@
 .hidden{id: "count_for_sizes",value:@count_for_sizes}
-%h1 Make a new Puzzle! (Currently in Beta)
-%hr
-%div.small_margin_left
-	=link_to "Need some inspiration?" , "http://piq.codeus.net/gallery/" , :target => "_blank"
-	%h3 Size 
-	%p#count_handler= @count_for_sizes[@puzzle_width].to_s + ' custom puzzles of this size so far, make more!'
-	= select_tag 'size_of_new_puzzle', options_for_select((5..20).to_a.map{|s| ["#{s}X#{s}", s]}, @puzzle_width) , class: 'inline'
-	%h3 Name
-	= text_field_tag 'name_of_puzzle'
-	%div#new_puzzle_div
-		%table#puzzle_table.new_puzzle_table.one-edge-shadow
-			-5.times do 
-				%tr
-					-5.times do
-						%td.puzzle_cell
-	%br
-	=submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton" 
-	%br
-	%h3 Submit for Approval!
-	= submit_tag 'Submit' , class: 'yellowbutton' , id: 'create_new_puzzle'
+%div.top_bar
+	%div.top_bar_inside
+		%p.top_bar_text Custom Puzzle Builder
+%div.new_puzzle_area
+	%div.custom_fields
+		%div.label_label TITLE
+		= text_field_tag 'name_of_puzzle' , " " , class: 'title_box'
+		%p#count_handler.label_label= @count_for_sizes[@puzzle_width].to_s + ' custom puzzles of this size so far'
+		= select_tag 'size_of_new_puzzle', options_for_select((5..20).to_a.map{|s| ["#{s}X#{s}", s]}, @puzzle_width)
+		%br
+		%div#new_puzzle_div.left
+			%table#puzzle_table.new_puzzle_table
+				-5.times do 
+					%tr
+						-5.times do
+							%td.puzzle_cell
+		%div.buttonia
+			%div.contain_butt
+				=link_to "Need some inspiration?" , "http://piq.codeus.net/gallery/" , :target => "_blank" , class: "label_label"
+				%div.contain_bottom
+					= submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton"
+					%br
+					= submit_tag 'Submit' , class: 'yellowbutton' , id: 'create_new_puzzle'
+
 
 
