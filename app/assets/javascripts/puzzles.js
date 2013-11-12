@@ -321,6 +321,13 @@ $(document).ready(function() {
     e.preventDefault(); 
   });
 
+  $('#show_the_rules').on('click', function(){
+    if($('#the_rules').hasClass('hidden'))
+      $('#the_rules').removeClass('hidden');
+    else
+      $('#the_rules').addClass('hidden');
+  });
+
   $('#check_solution').on('click', function(){
     checkSolution();
   });

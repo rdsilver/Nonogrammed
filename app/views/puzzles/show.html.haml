@@ -5,7 +5,7 @@
 
 %div#sidebar
   %div#logo.center
-    = image_tag "logo.png"
+    = image_tag "logo.png" , :alt => "Nonogrammed"
   %nav.navbuttons
     %div.upper
       = form_tag ({controller:'dashboard' , action: 'show'}) do
@@ -17,8 +17,10 @@
       =submit_tag "Give Hint" , id: "hint_puzzle", class: "greybutton" 
       =submit_tag "Reset Puzzle" , id: "reset_puzzle" , class: "greybutton" 
     %hr
+
   
   %h4.center Global Stats 
+  %p.center (For this puzzle)
   %div#innerstats
     -if(@puzzle_times_solved > 0)
       %b#times_solved Times Solved: #{@puzzle_times_solved}
@@ -34,13 +36,16 @@
       %b#average_size_time Average 4 Size: #{@puzzle_size_average_time} s
 
   %hr#check_solution
-  %h5.center
-    =link_to "Create New Puzzles", :action => "new_puzzle"
-  %p.center 
-    =link_to "What's going on?" , "http://en.wikipedia.org/wiki/Nonogram" , :target => "_blank"
   %p.center
-    Left/Right Click + Drag
-
+    =link_to "Create New Nonograms!", {:action => "new_puzzle" },id: "new_puzzle_link"
+  %p.center#show_the_rules
+    Show/Hide Rules
+  %b.hidden#the_rules
+    Nonogrammed is a puzzle website using the popular puzzle nonogram.
+    The goal is to use logic to uncover a hidden picture.
+    The numbers in the columns / rows represent the number of continous blocks in that row/column.
+    You can left/right click + drag to put dots and xs on the grid. For more information check out the 
+    =link_to "Wikipedia Page!" , "http://en.wikipedia.org/wiki/Nonogram" , :target => "_blank"
 
 %div#move_left_div
   %table#puzzle_table.one-edge-shadow  
