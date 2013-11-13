@@ -156,6 +156,7 @@ function checkSolution(){
         {
         $('#correct_puzzle_name').append('<h2 style=color:#333 >' + $("#puzzle_name").attr('value') + '</h2>');
         $('#correct_puzzle_name').addClass('named');
+        remove_xs();
         }
       }
       $('#check_solution').addClass("solved");
@@ -165,6 +166,12 @@ function checkSolution(){
        console.log(error);
       }
     });  
+}
+
+function remove_xs(){
+  $('.puzzle_cell').each(function (){
+      $(this).removeClass("x");
+    });
 }
 
 function updateStats(){ // Updates the stats on the left side
@@ -239,7 +246,7 @@ function resetTimer()
 window.onload = function (){ // Gets the timer going and sets better borders
   intervalId = setInterval(timer,1000);
   setNicerBorders();
-}
+};
 
 $(document).ready(function() {
   var deletion_mode = false;
