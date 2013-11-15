@@ -98,8 +98,10 @@ function check_solved_row_or_column(cell){
   else
     $('.puzzle_numbers_row').children("td").eq(col_num).removeClass("row_column_finished");
 
-
-  if($(".puzzle_numbers_row").children("td").not('.row_column_finished').length == 1) //If all columns are green check solution
+  empty_rows = 0;
+  $(".puzzle_numbers_row").children("td").each(function(){ if($(this).children().size()===0)empty_rows++;});
+  
+  if($(".puzzle_numbers_row").children("td").not('.row_column_finished').length == empty_rows) //If all columns are green check solution
   checkSolution();
 
 }
@@ -333,10 +335,6 @@ $(document).ready(function() {
       $('#the_rules').removeClass('hidden');
     else
       $('#the_rules').addClass('hidden');
-  });
-
-  $('#check_solution').on('click', function(){
-    checkSolution();
   });
 
   $('#hint_puzzle').on('click', function(){
