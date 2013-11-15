@@ -25,14 +25,19 @@ $('#size_of_new_puzzle').on('change', function(){ //If they change the size, we 
 
 $('#create_new_puzzle').on('click', function(){
 solution_string = getCurrentBoard();// Makes a solution string from all the cells
-name = $('#name_of_puzzle').val();
+name = $('#name_of_puzzle').val().trim(); 
+
+
+if(name==="") //NEED A TITLE TO SUBMIT
+alert("Add a title!");
+else
 $.ajax({ 
     type:"POST",
     url: "../puzzles/create_new_puzzle?solution=" + solution_string+"&name="+name,
     dataType:"json",
     success: function(data) {
       console.log("success");
-      $('.submitted_message').append("<b class=submitted_success style='color:green'>Submitted!</b>");
+      $('.buttonia').prepend("<h1 class=submitted_success style='color:green'>Submitted!</>");
       $('.submitted_success').delay(1000).fadeOut();
     },
     error: function(xhr, status, error) {
