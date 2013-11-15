@@ -25,6 +25,16 @@ function setNicerBorders(){ //Set Bolder borders for easier solving
     }
 }
 
+function setEmptyRows(){
+  //Empty Row Adding
+  $(".puzzle_numbers_row").children("td").not('.empty_row').each(function(){
+    if($(this).children().size()===0)
+      {
+        $(this).addClass('empty_row');
+      }
+  });
+}
+
 function getCurrentBoard() //Returns the current board solution string
 {
   solution_string = "";
@@ -38,7 +48,7 @@ function getCurrentBoard() //Returns the current board solution string
   return solution_string;
 }
 
-function check_solved_row_or_column(cell){
+function check_solved_row_or_column(cell){ //Adds green highlight to row
   row_num = $(cell).attr('id').split("-")[2];
   col_num = $(cell).attr('id').split("-")[3];
 
@@ -98,10 +108,7 @@ function check_solved_row_or_column(cell){
   else
     $('.puzzle_numbers_row').children("td").eq(col_num).removeClass("row_column_finished");
 
-  empty_rows = 0;
-  $(".puzzle_numbers_row").children("td").each(function(){ if($(this).children().size()===0)empty_rows++;});
-  
-  if($(".puzzle_numbers_row").children("td").not('.row_column_finished').length == empty_rows) //If all columns are green check solution
+  if($(".puzzle_numbers_row").children("td").not('.corner , .empty_row').length===$(".puzzle_numbers_row").children("td.row_column_finished").not('.corner , .empty_row').length) //If all columns are green check solution
   checkSolution();
 
 }
@@ -248,6 +255,7 @@ function resetTimer()
 window.onload = function (){ // Gets the timer going and sets better borders
   intervalId = setInterval(timer,1000);
   setNicerBorders();
+  setEmptyRows();
 };
 
 $(document).ready(function() {
